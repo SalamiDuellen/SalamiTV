@@ -159,16 +159,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\category.cs" />
-    <Compile Include="Models\role.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\SalamiDB.cs" />
-    <Compile Include="Models\tvchannel.cs" />
-    <Compile Include="Models\tvchannelprogram.cs" />
-    <Compile Include="Models\tvprogram.cs" />
-    <Compile Include="Models\tvprogramcategory.cs" />
-    <Compile Include="Models\user.cs" />
-    <Compile Include="Models\userrole.cs" />
-    <Compile Include="Models\usertablau.cs" />
+    <Compile Include="Models\TvChannel.cs" />
+    <Compile Include="Models\TvChannelProgram.cs" />
+    <Compile Include="Models\TvProgram.cs" />
+    <Compile Include="Models\TvProgramCategory.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserRole.cs" />
+    <Compile Include="Models\UserTablau.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
