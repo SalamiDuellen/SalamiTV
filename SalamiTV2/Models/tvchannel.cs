@@ -6,27 +6,27 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tvchannel")]
-    public partial class tvchannel
+    [Table("TvChannel")]
+    public partial class TvChannel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tvchannel()
+        public TvChannel()
         {
-            tvchannelprograms = new HashSet<tvchannelprogram>();
-            usertablaus = new HashSet<usertablau>();
+            TvChannelPrograms = new HashSet<TvChannelProgram>();
+            UserTablaus = new HashSet<UserTablau>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string name { get; set; }
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tvchannelprogram> tvchannelprograms { get; set; }
+        public virtual ICollection<TvChannelProgram> TvChannelPrograms { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usertablau> usertablaus { get; set; }
+        public virtual ICollection<UserTablau> UserTablaus { get; set; }
     }
 }

@@ -6,27 +6,23 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("role")]
-    public partial class role
+    [Table("Role")]
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public role()
+        public Role()
         {
-            userroles = new HashSet<userrole>();
+            UserRoles = new HashSet<UserRole>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
-        [Required]
-        [StringLength(200)]
-        public string admin { get; set; }
+        public byte? Admin { get; set; }
 
-        [Required]
-        [StringLength(200)]
-        public string customer { get; set; }
+        public byte? Costumer { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<userrole> userroles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

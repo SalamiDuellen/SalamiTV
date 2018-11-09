@@ -6,18 +6,18 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("userrole")]
-    public partial class userrole
+    [Table("UserRole")]
+    public partial class UserRole
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
-        public int userid { get; set; }
+        public int UserID { get; set; }
 
-        public int roleid { get; set; }
+        public int RoleID { get; set; }
 
-        public virtual role role { get; set; }
+        public virtual Role Role { get; set; }
 
-        public virtual user user { get; set; }
+        public virtual User User { get; set; }
     }
 }

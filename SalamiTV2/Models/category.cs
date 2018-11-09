@@ -6,23 +6,23 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("category")]
-    public partial class category
+    [Table("Category")]
+    public partial class Category
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public category()
+        public Category()
         {
-            tvprogramcategories = new HashSet<tvprogramcategory>();
+            TvProgramCategories = new HashSet<TvProgramCategory>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string genre { get; set; }
+        public string Genre { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tvprogramcategory> tvprogramcategories { get; set; }
+        public virtual ICollection<TvProgramCategory> TvProgramCategories { get; set; }
     }
 }

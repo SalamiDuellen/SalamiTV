@@ -6,31 +6,31 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("user")]
-    public partial class user
+    [Table("User")]
+    public partial class User
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public user()
+        public User()
         {
-            userroles = new HashSet<userrole>();
-            usertablaus = new HashSet<usertablau>();
+            UserRoles = new HashSet<UserRole>();
+            UserTablaus = new HashSet<UserTablau>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string username { get; set; }
+        public string UserName { get; set; }
 
         [Required]
         [StringLength(100)]
-        public string password { get; set; }
+        public string Password { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<userrole> userroles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<usertablau> usertablaus { get; set; }
+        public virtual ICollection<UserTablau> UserTablaus { get; set; }
     }
 }

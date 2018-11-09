@@ -6,35 +6,35 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tvprogram")]
-    public partial class tvprogram
+    [Table("TvProgram")]
+    public partial class TvProgram
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tvprogram()
+        public TvProgram()
         {
-            tvchannelprograms = new HashSet<tvchannelprogram>();
-            tvprogramcategories = new HashSet<tvprogramcategory>();
+            TvChannelPrograms = new HashSet<TvChannelProgram>();
+            TvProgramCategories = new HashSet<TvProgramCategory>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string title { get; set; }
+        public string Title { get; set; }
 
         [Required]
         [StringLength(255)]
-        public string details { get; set; }
+        public string Details { get; set; }
 
-        public DateTime broadcasting { get; set; }
+        public DateTime Broadcasting { get; set; }
 
-        public int duration { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tvchannelprogram> tvchannelprograms { get; set; }
+        public int Duration { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tvprogramcategory> tvprogramcategories { get; set; }
+        public virtual ICollection<TvChannelProgram> TvChannelPrograms { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TvProgramCategory> TvProgramCategories { get; set; }
     }
 }

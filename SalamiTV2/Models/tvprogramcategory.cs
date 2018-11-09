@@ -6,18 +6,18 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("tvprogramcategory")]
-    public partial class tvprogramcategory
+    [Table("TvProgramCategory")]
+    public partial class TvProgramCategory
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int id { get; set; }
+        public int ID { get; set; }
 
-        public int tvprogramid { get; set; }
+        public int TvProgramID { get; set; }
 
-        public int categoryid { get; set; }
+        public int CategoryID { get; set; }
 
-        public virtual category category { get; set; }
+        public virtual Category Category { get; set; }
 
-        public virtual tvprogram tvprogram { get; set; }
+        public virtual TvProgram TvProgram { get; set; }
     }
 }
