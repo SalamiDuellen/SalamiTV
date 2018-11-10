@@ -1,24 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using SalamiTV2.Models;
 using SalamiTV2.DAL;
+using System.Collections.Generic;
+
 
 namespace SalamiTV2.Controllers
 {
     public class TvChannelController : Controller
     {
         private SalamiDB db = new SalamiDB();
-
+        //TvChannelProgram
         // GET: TvChannels
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Index(TvChannel tv)
         {
+            List<TvChannel> channels = new List<TvChannel>();
+            if (tv.Name != null)
+            {
+                //var tvChannel = from channel in db.TvChannels where db.TvChannels.Contains(tv) select channel;
+                var tvChannel = db.TvChannels.Where(t => t.Name == tv.Name);
+              
+                return View(tvChannel.ToList());
+            }
+
             return View(db.TvChannels.ToList());
+
         }
 
         // GET: TvChannels/Details/5
