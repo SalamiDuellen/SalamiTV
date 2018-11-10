@@ -156,12 +156,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\TvChannelController.cs" />
+    <Compile Include="Controllers\UserInfoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\SalamiDB.cs" />
+    <Compile Include="DAL\SalamiDB.cs" />
     <Compile Include="Models\TvChannel.cs" />
     <Compile Include="Models\TvChannelProgram.cs" />
     <Compile Include="Models\TvProgram.cs" />
@@ -169,6 +171,7 @@
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\UserTablau.cs" />
+    <Compile Include="Controllers\UserTablauController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +213,21 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\TvChannel\Create.cshtml" />
+    <Content Include="Views\TvChannel\Delete.cshtml" />
+    <Content Include="Views\TvChannel\Details.cshtml" />
+    <Content Include="Views\TvChannel\Edit.cshtml" />
+    <Content Include="Views\TvChannel\Index.cshtml" />
+    <Content Include="Views\UserInfo\Create.cshtml" />
+    <Content Include="Views\UserInfo\Delete.cshtml" />
+    <Content Include="Views\UserInfo\Details.cshtml" />
+    <Content Include="Views\UserInfo\Edit.cshtml" />
+    <Content Include="Views\UserInfo\Index.cshtml" />
+    <Content Include="Views\UserTablau\Create.cshtml" />
+    <Content Include="Views\UserTablau\Delete.cshtml" />
+    <Content Include="Views\UserTablau\Details.cshtml" />
+    <Content Include="Views\UserTablau\Edit.cshtml" />
+    <Content Include="Views\UserTablau\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

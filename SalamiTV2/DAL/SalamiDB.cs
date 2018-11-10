@@ -1,9 +1,10 @@
-namespace SalamiTV2.Models
+namespace SalamiTV2.DAL
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using SalamiTV2.Models;
 
     public partial class SalamiDB : DbContext
     {
