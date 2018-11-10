@@ -6,11 +6,11 @@ namespace SalamiTV2.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("User")]
-    public partial class User
+    [Table("UserInfo")]
+    public partial class UserInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public UserInfo()
         {
             UserRoles = new HashSet<UserRole>();
             UserTablaus = new HashSet<UserTablau>();

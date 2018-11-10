@@ -18,6 +18,6 @@ namespace SalamiTV2.Models
 
         public virtual TvChannel TvChannel { get; set; }
 
-        public virtual User User { get; set; }
+        public virtual UserInfo UserInfo { get; set; }
     }
 }

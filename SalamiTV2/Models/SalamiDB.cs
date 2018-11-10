@@ -18,7 +18,7 @@ namespace SalamiTV2.Models
         public virtual DbSet<TvChannelProgram> TvChannelPrograms { get; set; }
         public virtual DbSet<TvProgram> TvPrograms { get; set; }
         public virtual DbSet<TvProgramCategory> TvProgramCategories { get; set; }
-        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<UserInfo> UserInfoes { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<UserTablau> UserTablaus { get; set; }
 
@@ -71,22 +71,24 @@ namespace SalamiTV2.Models
                 .WithRequired(e => e.TvProgram)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserInfo>()
                 .Property(e => e.UserName)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserInfo>()
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserInfo>()
                 .HasMany(e => e.UserRoles)
-                .WithRequired(e => e.User)
+                .WithRequired(e => e.UserInfo)
+                .HasForeignKey(e => e.UserID)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserInfo>()
                 .HasMany(e => e.UserTablaus)
-                .WithRequired(e => e.User)
+                .WithRequired(e => e.UserInfo)
+                .HasForeignKey(e => e.UserID)
                 .WillCascadeOnDelete(false);
         }
     }
