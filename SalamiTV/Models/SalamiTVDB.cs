@@ -8,7 +8,7 @@ namespace SalamiTV.Models
     public partial class SalamiTVDB : DbContext
     {
         public SalamiTVDB()
-            : base("name=SalamiTVDB")
+            : base("SalamiTVDB")
         {
         }
 
