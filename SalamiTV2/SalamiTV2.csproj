@@ -158,12 +158,13 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\TvChannelController.cs" />
     <Compile Include="Controllers\TvProgramController.cs" />
+    <Compile Include="DAL\Encryptor.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Role.cs" />
-    <Compile Include="Models\SalamiDB.cs" />
+    <Compile Include="DAL\SalamiDB.cs" />
     <Compile Include="Models\TvChannel.cs" />
     <Compile Include="Models\TvProgram.cs" />
     <Compile Include="Models\TvProgramCategory.cs" />
@@ -224,7 +225,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
