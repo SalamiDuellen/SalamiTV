@@ -1,34 +1,29 @@
-namespace SalamiTV2.Models
+namespace SalamiTV.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("UserInfo")]
-    public partial class UserInfo 
+    [Table("TvChannel")]
+    public partial class TvChannel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public UserInfo()
+        public TvChannel()
         {
-            UserRoles = new HashSet<UserRole>();
+            TvPrograms = new HashSet<TvProgram>();
             UserTablaus = new HashSet<UserTablau>();
         }
 
         public int ID { get; set; }
 
         [Required]
-        [StringLength(100)]
-        public string UserName { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string Password { get; set; }
+        [StringLength(255)]
+        public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<TvProgram> TvPrograms { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTablau> UserTablaus { get; set; }

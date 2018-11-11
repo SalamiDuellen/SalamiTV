@@ -1,6 +1,5 @@
-namespace SalamiTV2.Models
+namespace SalamiTV.Models
 {
-    using Microsoft.AspNet.Identity.EntityFramework;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -8,7 +7,7 @@ namespace SalamiTV2.Models
     using System.Data.Entity.Spatial;
 
     [Table("UserInfo")]
-    public partial class UserInfo 
+    public partial class UserInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserInfo()

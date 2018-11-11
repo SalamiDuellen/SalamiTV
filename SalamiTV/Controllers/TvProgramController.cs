@@ -7,114 +7,116 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalamiTV2.Models;
-using Microsoft.AspNet.Identity;
+using SalamiTV.Models;
 
-namespace SalamiTV2.Controllers
+namespace SalamiTV.Controllers
 {
-    public class UserInfoController : Controller
+    public class TvProgramController : Controller
     {
-        private SalamiDB db = new SalamiDB();
+        private SalamiTVDB db = new SalamiTVDB();
 
-        // GET: UserInfo
+        // GET: TvProgram
         public async Task<ActionResult> Index()
         {
-            return View(await db.UserInfoes.ToListAsync());
+            var tvPrograms = db.TvPrograms.Include(t => t.TvChannel);
+            return View(await tvPrograms.ToListAsync());
         }
 
-        // GET: UserInfo/Details/5
+        // GET: TvProgram/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            if (userInfo == null)
+            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            return View(tvProgram);
         }
 
-        // GET: UserInfo/Create
+        // GET: TvProgram/Create
         public ActionResult Create()
         {
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name");
             return View();
         }
 
-        // POST: UserInfo/Create
+        // POST: TvProgram/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,UserName,Password")] UserInfo userInfo)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
-                var user = new UserInfo() { UserName = userInfo.UserName };
-                //var result = await UserManager.CreateAsync(user, user.Password);
-                db.UserInfoes.Add(userInfo);
+                db.TvPrograms.Add(tvProgram);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(userInfo);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            return View(tvProgram);
         }
 
-        // GET: UserInfo/Edit/5
+        // GET: TvProgram/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            if (userInfo == null)
+            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            return View(tvProgram);
         }
 
-        // POST: UserInfo/Edit/5
+        // POST: TvProgram/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,UserName,Password")] UserInfo userInfo)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userInfo).State = EntityState.Modified;
+                db.Entry(tvProgram).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(userInfo);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            return View(tvProgram);
         }
 
-        // GET: UserInfo/Delete/5
+        // GET: TvProgram/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            if (userInfo == null)
+            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            return View(tvProgram);
         }
 
-        // POST: UserInfo/Delete/5
+        // POST: TvProgram/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            db.UserInfoes.Remove(userInfo);
+            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            db.TvPrograms.Remove(tvProgram);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
