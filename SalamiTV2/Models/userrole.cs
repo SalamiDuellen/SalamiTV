@@ -9,7 +9,6 @@ namespace SalamiTV2.Models
     [Table("UserRole")]
     public partial class UserRole
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         public int UserID { get; set; }

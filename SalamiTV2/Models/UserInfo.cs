@@ -16,7 +16,6 @@ namespace SalamiTV2.Models
             UserTablaus = new HashSet<UserTablau>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]

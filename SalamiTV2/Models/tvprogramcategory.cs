@@ -9,7 +9,6 @@ namespace SalamiTV2.Models
     [Table("TvProgramCategory")]
     public partial class TvProgramCategory
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         public int TvProgramID { get; set; }

@@ -1,22 +1,20 @@
-namespace SalamiTV2.DAL
+namespace SalamiTV2.Models
 {
     using System;
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
-    using SalamiTV2.Models;
 
     public partial class SalamiDB : DbContext
     {
         public SalamiDB()
-            : base("name=SalamiDB")
+            : base("name=SalamiDB1")
         {
         }
 
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<TvChannel> TvChannels { get; set; }
-        public virtual DbSet<TvChannelProgram> TvChannelPrograms { get; set; }
         public virtual DbSet<TvProgram> TvPrograms { get; set; }
         public virtual DbSet<TvProgramCategory> TvProgramCategories { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
@@ -44,9 +42,8 @@ namespace SalamiTV2.DAL
                 .IsUnicode(false);
 
             modelBuilder.Entity<TvChannel>()
-                .HasMany(e => e.TvChannelPrograms)
+                .HasMany(e => e.TvPrograms)
                 .WithRequired(e => e.TvChannel)
-                .HasForeignKey(e => e.ProgramID)
                 .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TvChannel>()
@@ -61,11 +58,6 @@ namespace SalamiTV2.DAL
             modelBuilder.Entity<TvProgram>()
                 .Property(e => e.Details)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<TvProgram>()
-                .HasMany(e => e.TvChannelPrograms)
-                .WithRequired(e => e.TvProgram)
-                .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TvProgram>()
                 .HasMany(e => e.TvProgramCategories)

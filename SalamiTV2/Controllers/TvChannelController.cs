@@ -1,36 +1,34 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using SalamiTV2.Models;
-using SalamiTV2.DAL;
-using System.Collections.Generic;
-
 
 namespace SalamiTV2.Controllers
 {
     public class TvChannelController : Controller
     {
         private SalamiDB db = new SalamiDB();
-        //TvChannelProgram
-        // GET: TvChannels
-        [HttpGet]
-        public ActionResult Index(TvChannel tv)
+
+        // GET: TvChannel
+        public ActionResult Index()
         {
-            List<TvChannel> channels = new List<TvChannel>();
-            if (tv.Name != null)
+
+            /*
+             * var pRullar = context.TvChannels.SelectMany(x => x.Programs.Where(y => y.Category.Name == "Vuxenfilm"));
+             */
+            using (var db = new SalamiDB())
             {
-                //var tvChannel = from channel in db.TvChannels where db.TvChannels.Contains(tv) select channel;
-                var tvChannel = db.TvChannels.Where(t => t.Name == tv.Name);
-              
-                return View(tvChannel.ToList());
+                var channels = db.TvChannels.ToList();
             }
-
             return View(db.TvChannels.ToList());
-
         }
 
-        // GET: TvChannels/Details/5
+        // GET: TvChannel/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -45,13 +43,13 @@ namespace SalamiTV2.Controllers
             return View(tvChannel);
         }
 
-        // GET: TvChannels/Create
+        // GET: TvChannel/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: TvChannels/Create
+        // POST: TvChannel/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -68,7 +66,7 @@ namespace SalamiTV2.Controllers
             return View(tvChannel);
         }
 
-        // GET: TvChannels/Edit/5
+        // GET: TvChannel/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,7 +81,7 @@ namespace SalamiTV2.Controllers
             return View(tvChannel);
         }
 
-        // POST: TvChannels/Edit/5
+        // POST: TvChannel/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -99,7 +97,7 @@ namespace SalamiTV2.Controllers
             return View(tvChannel);
         }
 
-        // GET: TvChannels/Delete/5
+        // GET: TvChannel/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -114,7 +112,7 @@ namespace SalamiTV2.Controllers
             return View(tvChannel);
         }
 
-        // POST: TvChannels/Delete/5
+        // POST: TvChannel/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

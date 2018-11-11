@@ -15,7 +15,6 @@ namespace SalamiTV2.Models
             UserRoles = new HashSet<UserRole>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         public byte? Admin { get; set; }

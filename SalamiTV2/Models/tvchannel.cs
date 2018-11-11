@@ -12,11 +12,10 @@ namespace SalamiTV2.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TvChannel()
         {
-            TvChannelPrograms = new HashSet<TvChannelProgram>();
+            TvPrograms = new HashSet<TvProgram>();
             UserTablaus = new HashSet<UserTablau>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]
@@ -24,7 +23,7 @@ namespace SalamiTV2.Models
         public string Name { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<TvChannelProgram> TvChannelPrograms { get; set; }
+        public virtual ICollection<TvProgram> TvPrograms { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTablau> UserTablaus { get; set; }

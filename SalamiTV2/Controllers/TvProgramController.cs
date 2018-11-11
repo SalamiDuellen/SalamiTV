@@ -6,123 +6,116 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalamiTV2.DAL;
+using SalamiTV2.Models;
 
-
-namespace SalamiTV2.Models
+namespace SalamiTV2.Controllers
 {
-    public class UserTablausController : Controller
+    public class TvProgramController : Controller
     {
-
-        //Kallas från UserInfoes-vyn
         private SalamiDB db = new SalamiDB();
 
-        // GET: UserTablaus
+        // GET: TvProgram
         public ActionResult Index()
         {
-            var userTablaus = db.UserTablaus.Include(u => u.TvChannel).Include(u => u.UserInfo);
-            return View(userTablaus.ToList());
+            var tvPrograms = db.TvPrograms.Include(t => t.TvChannel);
+            return View(tvPrograms.ToList());
         }
 
-        // GET: UserTablaus/Details/5
+        // GET: TvProgram/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = db.UserTablaus.Find(id);
-            if (userTablau == null)
+            TvProgram tvProgram = db.TvPrograms.Find(id);
+            if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            return View(userTablau);
+            return View(tvProgram);
         }
 
-        // GET: UserTablaus/Create
+        // GET: TvProgram/Create
         public ActionResult Create()
         {
             ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name");
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName");
             return View();
         }
 
-        // POST: UserTablaus/Create
+        // POST: TvProgram/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,TvChannelID,UserID")] UserTablau userTablau)
+        public ActionResult Create([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
-                db.UserTablaus.Add(userTablau);
+                db.TvPrograms.Add(tvProgram);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.UserID);
-            return View(userTablau);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            return View(tvProgram);
         }
 
-        // GET: UserTablaus/Edit/5
+        // GET: TvProgram/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = db.UserTablaus.Find(id);
-            if (userTablau == null)
+            TvProgram tvProgram = db.TvPrograms.Find(id);
+            if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.UserID);
-            return View(userTablau);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            return View(tvProgram);
         }
 
-        // POST: UserTablaus/Edit/5
+        // POST: TvProgram/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TvChannelID,UserID")] UserTablau userTablau)
+        public ActionResult Edit([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userTablau).State = EntityState.Modified;
+                db.Entry(tvProgram).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.UserID);
-            return View(userTablau);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            return View(tvProgram);
         }
 
-        // GET: UserTablaus/Delete/5
+        // GET: TvProgram/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = db.UserTablaus.Find(id);
-            if (userTablau == null)
+            TvProgram tvProgram = db.TvPrograms.Find(id);
+            if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            return View(userTablau);
+            return View(tvProgram);
         }
 
-        // POST: UserTablaus/Delete/5
+        // POST: TvProgram/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            UserTablau userTablau = db.UserTablaus.Find(id);
-            db.UserTablaus.Remove(userTablau);
+            TvProgram tvProgram = db.TvPrograms.Find(id);
+            db.TvPrograms.Remove(tvProgram);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

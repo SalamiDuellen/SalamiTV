@@ -15,7 +15,6 @@ namespace SalamiTV2.Models
             TvProgramCategories = new HashSet<TvProgramCategory>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ID { get; set; }
 
         [Required]
