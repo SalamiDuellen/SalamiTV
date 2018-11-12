@@ -204,7 +204,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\SalamiTVDB.cs" />
-    <Compile Include="Models\TablauViewModel.cs" />
     <Compile Include="Models\TvChannel.cs" />
     <Compile Include="Models\TvProgram.cs" />
     <Compile Include="Models\TvProgramCategory.cs" />

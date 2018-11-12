@@ -13,7 +13,7 @@ namespace SalamiTV.Controllers
     {
         SalamiTVDB salamiContext = new SalamiTVDB();
 
-        public ActionResult Index(TablauViewModel tablauView)
+        public ActionResult Index()
         {
             //List<SelectListItem> list = new List<SelectListItem>();
             ////var pRullar = context.TvChannels.SelectMany(x => x.Programs.Where(y => y.Category.Name == "Vuxenfilm"));
