@@ -33,6 +33,23 @@ namespace SalamiTV.Models
 
         public virtual TvChannel TvChannel { get; set; }
 
+        //public string StartTime
+        //{
+        //    get => Broadcasting.TimeOfDay.ToString().Remove(5);
+        //    set
+        //    {
+        //        Broadcasting.TimeOfDay.ToString().Remove(5);
+        //    }
+        //}
+        //public string EndTime
+        //{
+        //    get { return Broadcasting.AddMinutes(Duration).TimeOfDay.ToString().Remove(5); }
+        //    set
+        //    {
+        //        Broadcasting.AddMinutes(Duration).TimeOfDay.ToString().Remove(5);
+        //    }
+        //}
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TvProgramCategory> TvProgramCategories { get; set; }
     }

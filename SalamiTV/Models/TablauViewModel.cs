@@ -1,23 +1,38 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
 namespace SalamiTV.Models
 {
-    public class TablauViewModels
-    {
-        [Required]
-        [StringLength(255)]
-        public string TvChannelName { get; set; }
+	public class TablauViewModel
+	{
+        public string Title { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string ProgramTitle { get; set; }
+        public string Details { get; set; }
 
-        [Required]
-        [StringLength(255)]
-        public string ProgramDetails { get; set; }
+        public DateTime Broadcasting { get; set; }
+
+        public int Duration { get; set; }
+
+        public string StartTime
+        {
+            get => Broadcasting.TimeOfDay.ToString().Remove(5);
+            set
+            {
+                Broadcasting.TimeOfDay.ToString().Remove(5);
+            }
+        }
+        public string EndTime
+        {
+            get { return Broadcasting.AddMinutes(Duration).TimeOfDay.ToString().Remove(5); }
+            set
+            {
+                Broadcasting.AddMinutes(Duration).TimeOfDay.ToString().Remove(5);
+            }
+        }
+
+        public string Name { get; set; }
+
     }
 }
