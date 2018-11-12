@@ -13,12 +13,12 @@ namespace SalamiTV.Models
         }
 
         public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
+        //public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<TvChannel> TvChannels { get; set; }
         public virtual DbSet<TvProgram> TvPrograms { get; set; }
         public virtual DbSet<TvProgramCategory> TvProgramCategories { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
+        //public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<UserTablau> UserTablaus { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,10 +32,10 @@ namespace SalamiTV.Models
                 .WithRequired(e => e.Category)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Role>()
-                .HasMany(e => e.UserRoles)
-                .WithRequired(e => e.Role)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<Role>()
+            //    .HasMany(e => e.UserRoles)
+            //    .WithRequired(e => e.Role)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<TvChannel>()
                 .Property(e => e.Name)
@@ -72,11 +72,11 @@ namespace SalamiTV.Models
                 .Property(e => e.Password)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<UserInfo>()
-                .HasMany(e => e.UserRoles)
-                .WithRequired(e => e.UserInfo)
-                .HasForeignKey(e => e.UserID)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<UserInfo>()
+            //    .HasMany(e => e.UserRoles)
+            //    .WithRequired(e => e.UserInfo)
+            //    .HasForeignKey(e => e.UserID)
+            //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserInfo>()
                 .HasMany(e => e.UserTablaus)

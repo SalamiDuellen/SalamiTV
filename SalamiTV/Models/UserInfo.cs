@@ -12,7 +12,7 @@ namespace SalamiTV.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserInfo()
         {
-            UserRoles = new HashSet<UserRole>();
+            //UserRoles = new HashSet<UserRole>();
             UserTablaus = new HashSet<UserTablau>();
         }
 
@@ -26,8 +26,8 @@ namespace SalamiTV.Models
         [StringLength(100)]
         public string Password { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
+        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        //public virtual ICollection<UserRole> UserRoles { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserTablau> UserTablaus { get; set; }

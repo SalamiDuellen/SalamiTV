@@ -1,7 +1,8 @@
 ﻿body {
-    padding-top: 50px;
+    /*padding-top: 50px;*/
     padding-bottom: 20px;
 }
+
 
 /* Set padding to keep content from hitting the edges */
 .body-content {
@@ -21,4 +22,168 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+/* Hide the carousel text when the screen is less than 600 pixels wide */
+@media (max-width: 600px) {
+    #myCarousel {
+        display: none;
+    }
+
+    ul.active {
+        background: #BDD4DE;
+    }
+}
+
+#myCarousel {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+/*#region SiteNavigation */
+.navbar-default {
+    background-color: #BDD4DE;
+    border-color: #e7e7e7;
+    margin-bottom: 0px;
+}
+
+    .navbar-default .navbar-brand {
+        color: #000;
+    }
+
+        .navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
+            color: #e7e7e7;
+            background-color: #3F5765;
+        }
+
+
+    .navbar-default .navbar-nav > li > a {
+        color: #000
+    }
+
+        .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+            background-color: #3F5765;
+            color: #e7e7e7
+        }
+
+    .navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus, .navbar-default .navbar-nav > .active > a:hover {
+        background-color: #3F5765;
+        color: #e7e7e7
+    }
+/*#endregion */
+
+
+.pagination {
+    width: 100%;
+    align-content: center;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+/*#region Old SiteNavigation REMOVE? */
+
+/*.navbar-default .navbar-nav > li > a {
+        color: #000;
+        background: #BDD4DE;
+    }*/
+
+
+/*.navbar {
+    background: #BDD4DE;
+    color: #000;
+    margin-bottom: 0;
+    border-radius: 0;
+}*/
+/*/*texten på listitem ändrats till svart*/
+/*.navbar-inverse .navbar-nav > li > a {
+    color: #000;
+    background: #BDD4DE;
+}
+
+.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active,
+.navbar-inverse .navbar-nav > .active > a:hover {
+    background-color: #BDD4DE;
+    color: #fff;
+}*/
+/*.navbar-inverse .navbar-nav > li:hover {
+    color: #000;
+    background-color: #3F5765;
+}*/
+/*li form {
+    padding-top: 15px;
+    padding-bottom: 0px;
+}*/
+
+/*/*Gör så att sökformuläret inte markeras när man hovrar över*/
+/*#topnavsearch:hover {
+    background-color: #BDD4DE;
+    float: right;
+}*/
+
+/*#endregion */
+
+#imgDiv {
+    width: 100%;
+    max-width: 200px;
+}
+
+ul {
+    list-style: none;
+}
+
+.list-group-item {
+    border: none;
+    padding: 2%;
+    text-align: left;
+}
+
+.coworkerinfo img {
+    width: 25%;
+    margin: auto;
+}
+
+#tvchannel img {
+    width: 20%;
+    margin: auto;
+}
+
+/* Add a gray background color and some padding to the footer */
+footer {
+    background-color: #f2f2f2;
+    padding: 25px;
+}
+
+.carousel-inner img {
+    width: 100%; /* Set width to 100% */
+    margin: auto;
+    min-height: 200px;
+    max-height: 300px;
+    max-width: 400px;
+}
+/* En rubrik för att fylla ut lite på sidan*/
+#headaboutus {
+    text-align: center;
+    margin: 10%;
+}
+
+p {
+    text-align: center;
+}
+
+#contactusform {
+    margin: auto;
+    max-width: 600px;
+    max-height: 1000px;
+}
+
+.error {
+    color: red;
+    margin-left: auto;
+    text-align: end;
+}
+
+label.error {
+    display: inline;
 }

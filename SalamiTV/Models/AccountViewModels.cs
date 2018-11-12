@@ -64,11 +64,7 @@ namespace SalamiTV.Models
 
     public class RegisterViewModel
     {
-        //Lagt hit själv // AA
-        [Required]
-        [Display(Name = "Role")]
-        public Role Role { get; set; }
-
+        
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -84,6 +80,9 @@ namespace SalamiTV.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        //Används för att få rollnamnen i en dropdownlista 
+        public string RoleName { get; set; }
     }
 
     public class ResetPasswordViewModel
