@@ -90,6 +90,16 @@
                                 <li>
                                     @Html.DisplayFor(modelItem => thing.Details)
                                 </li>
+                                <li>
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
+                                </li>
+                                <li>
+                                    @foreach (var cat in thing.TvProgramCategories)
+                                    {
+                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                    }
+
+                                </li>
 
                             }
                         </ul>
