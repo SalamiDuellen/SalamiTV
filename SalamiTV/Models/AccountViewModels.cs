@@ -64,6 +64,11 @@ namespace SalamiTV.Models
 
     public class RegisterViewModel
     {
+        //Lagt hit själv // AA
+        [Required]
+        [Display(Name = "Role")]
+        public Role Role { get; set; }
+
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
