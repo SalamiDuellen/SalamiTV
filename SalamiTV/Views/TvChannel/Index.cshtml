@@ -1,0 +1,68 @@
+﻿@model IEnumerable<SalamiTV.Models.TvChannel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<div class="container text-center">
+    <div id="tvchannel">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div style="font-size:18px">
+                        <ul>
+                            @Html.DisplayFor(modelItem => item.Name)
+
+                            @foreach (var thing in item.TvPrograms)
+
+                            {
+
+                                <li>
+                                    @Html.DisplayFor(modelItem => thing.Title)
+                                </li>
+
+                                <li>
+                                    @Html.DisplayFor(modelItem => thing.Details)
+                                </li>
+                                <li>
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
+                                </li>
+                                <li>
+                                    @foreach (var cat in thing.TvProgramCategories)
+                                    {
+                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                    }
+
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        </td>
+    </tr>
+}
+
+            </table>

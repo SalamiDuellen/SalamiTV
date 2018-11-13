@@ -16,7 +16,7 @@ namespace SalamiTV.Models
             UserTablaus = new HashSet<UserTablau>();
         }
 
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         [Required]
         [StringLength(255)]

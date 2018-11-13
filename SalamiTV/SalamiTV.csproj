@@ -195,6 +195,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\TvChannelController.cs" />
     <Compile Include="Controllers\TvProgramController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -314,6 +315,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\TvChannel\Create.cshtml" />
+    <Content Include="Views\TvChannel\Delete.cshtml" />
+    <Content Include="Views\TvChannel\Details.cshtml" />
+    <Content Include="Views\TvChannel\Edit.cshtml" />
+    <Content Include="Views\TvChannel\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
