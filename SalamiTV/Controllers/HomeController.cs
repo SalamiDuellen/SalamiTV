@@ -15,16 +15,8 @@ namespace SalamiTV.Controllers
 
         public ActionResult Index()
         {
-            //List<SelectListItem> list = new List<SelectListItem>();
-            ////var pRullar = context.TvChannels.SelectMany(x => x.Programs.Where(y => y.Category.Name == "Vuxenfilm"));
-            //foreach (var item in salamiContext.TvPrograms)
-            //{
-            //}
-
-            //var program = salamiContext.TvProgramCategories.Select(x => x.TvProgram);//Printar tvprogrammen i som finns i programcategories
             var program = salamiContext.TvChannels.Select(x => x);//Printar tvprogrammen i som finns i programcategories
 
-        
             return View(program.ToList());
         }
 

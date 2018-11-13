@@ -60,6 +60,9 @@ namespace SalamiTV.Models
 
         [Display(Name = "Remember me?")]
         public bool RememberMe { get; set; }
+
+        public string RoleName { get; set; }
+
     }
 
     public class RegisterViewModel
