@@ -1,6 +1,6 @@
 ﻿body {
     /*padding-top: 50px;*/
-    padding-bottom: 20px;
+    padding-bottom: 2px;
 }
 
 
@@ -42,11 +42,90 @@ textarea {
     margin-bottom: 5%;
 }
 
+#channelheader {
+    /*background-color: #eaf3f7;*/
+    text-align: center;
+}
+
+#programlist {
+    /*background-color: #eaf3f7;*/
+    /*border: 0px solid #a8bac4;*/
+}
+
+#channelcolumns {
+    /*background-color:red;*/
+}
+/*#channelname {
+        font-size: 16px;
+        border: 10px;
+        /*border-color: #a8bac4;*/
+/*}*/
+
+
+/*li form {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}*/
+
+#headerprogramlogo img {
+    width: 15%;
+}
+
+#channelheader {
+    background-color: #BDD4DE;
+    border: 2px solid #BDD4DE;
+    border-bottom-width: 1px;
+}
+
+.list-group {
+    border: 2px solid #BDD4DE;
+    border-top-width: 1px;
+    /*background-color: #eaf3f7;*/
+}
+
+.list-group-item {
+    border: none;
+    padding: 1% 4% 1% 4%;
+    margin: 0%;
+    font-size: 12px;
+    background-color: #eaf3f7;
+}
+
+.row {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+    .row > [class*='col-'] {
+        display: flex;
+        flex-direction: column;
+    }
+
+/*.list-group-item {
+        border: none;
+        padding: 2%;
+        text-align: left;
+    }*/
+
+
+.navbar navbar-light {
+    padding-bottom: 1px;
+    font-size: 8px;
+}
+
+#tvchannel img {
+    width: 20%;
+    margin: auto;
+}
+
 /*#region SiteNavigation */
 .navbar-default {
     background-color: #BDD4DE;
     border-color: #e7e7e7;
-    margin-bottom: 0px;
+    margin-bottom: 1px;
 }
 
     .navbar-default .navbar-brand {
@@ -73,14 +152,6 @@ textarea {
         color: #e7e7e7
     }
 /*#endregion */
-
-
-.pagination {
-    width: 100%;
-    align-content: center;
-    margin-top: 0px;
-    margin-bottom: 0px;
-}
 
 /*#region Old SiteNavigation REMOVE? */
 
@@ -133,19 +204,8 @@ ul {
     list-style: none;
 }
 
-.list-group-item {
-    border: none;
-    padding: 2%;
-    text-align: left;
-}
-
 .coworkerinfo img {
     width: 25%;
-    margin: auto;
-}
-
-#tvchannel img {
-    width: 20%;
     margin: auto;
 }
 

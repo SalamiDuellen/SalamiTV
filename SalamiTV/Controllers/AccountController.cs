@@ -196,8 +196,14 @@ namespace SalamiTV.Controllers
                 AddErrors(result);
             }
 
+            // Rollerna behöver printars i vyb och jag kommer nte på något bättre sätt nu.
+            List<SelectListItem> list = new List<SelectListItem>();
+            foreach (var role in RoleManager.Roles)
+
+                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
+            ViewBag.Roles = list;
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View();
         }
 
         //
