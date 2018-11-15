@@ -197,6 +197,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TvChannelController.cs" />
     <Compile Include="Controllers\TvProgramController.cs" />
+    <Compile Include="Controllers\UserTablauController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -320,6 +321,11 @@
     <Content Include="Views\TvChannel\Details.cshtml" />
     <Content Include="Views\TvChannel\Edit.cshtml" />
     <Content Include="Views\TvChannel\Index.cshtml" />
+    <Content Include="Views\UserTablau\Create.cshtml" />
+    <Content Include="Views\UserTablau\Delete.cshtml" />
+    <Content Include="Views\UserTablau\Details.cshtml" />
+    <Content Include="Views\UserTablau\Edit.cshtml" />
+    <Content Include="Views\UserTablau\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

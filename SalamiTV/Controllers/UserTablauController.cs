@@ -7,114 +7,121 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using SalamiTV2.Models;
-using Microsoft.AspNet.Identity;
+using SalamiTV.Models;
 
-namespace SalamiTV2.Controllers
+namespace SalamiTV.Controllers
 {
-    public class UserInfoController : Controller
+    public class UserTablauController : Controller
     {
-        private SalamiDB db = new SalamiDB();
+        private SalamiTVDB db = new SalamiTVDB();
 
-        // GET: UserInfo
+        // GET: UserTablau
         public async Task<ActionResult> Index()
         {
-            return View(await db.UserInfoes.ToListAsync());
+
+            var userTablaus = db.UserTablaus.Include(u => u.TvChannel).Include(u => u.UserInfo);
+            return View(await userTablaus.ToListAsync());
         }
 
-        // GET: UserInfo/Details/5
+        // GET: UserTablau/Details/5
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            if (userInfo == null)
+            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+            if (userTablau == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            return View(userTablau);
         }
 
-        // GET: UserInfo/Create
+        // GET: UserTablau/Create
         public ActionResult Create()
         {
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name");
+            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName");
             return View();
         }
 
-        // POST: UserInfo/Create
+        // POST: UserTablau/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,UserName,Password")] UserInfo userInfo)
+        public async Task<ActionResult> Create([Bind(Include = "ID,TvChannelID,AspNetUsersId")] UserTablau userTablau)
         {
             if (ModelState.IsValid)
             {
-                var user = new UserInfo() { UserName = userInfo.UserName };
-                //var result = await UserManager.CreateAsync(user, user.Password);
-                db.UserInfoes.Add(userInfo);
+                db.UserTablaus.Add(userTablau);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(userInfo);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            return View(userTablau);
         }
 
-        // GET: UserInfo/Edit/5
+        // GET: UserTablau/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            if (userInfo == null)
+            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+            if (userTablau == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            return View(userTablau);
         }
 
-        // POST: UserInfo/Edit/5
+        // POST: UserTablau/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,UserName,Password")] UserInfo userInfo)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,TvChannelID,AspNetUsersId")] UserTablau userTablau)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userInfo).State = EntityState.Modified;
+                db.Entry(userTablau).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(userInfo);
+            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            return View(userTablau);
         }
 
-        // GET: UserInfo/Delete/5
+        // GET: UserTablau/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            if (userInfo == null)
+            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+            if (userTablau == null)
             {
                 return HttpNotFound();
             }
-            return View(userInfo);
+            return View(userTablau);
         }
 
-        // POST: UserInfo/Delete/5
+        // POST: UserTablau/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            UserInfo userInfo = await db.UserInfoes.FindAsync(id);
-            db.UserInfoes.Remove(userInfo);
+            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+            db.UserTablaus.Remove(userTablau);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

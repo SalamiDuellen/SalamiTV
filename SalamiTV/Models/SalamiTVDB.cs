@@ -75,13 +75,13 @@ namespace SalamiTV.Models
             //modelBuilder.Entity<UserInfo>()
             //    .HasMany(e => e.UserRoles)
             //    .WithRequired(e => e.UserInfo)
-            //    .HasForeignKey(e => e.UserID)
+            //    .HasForeignKey(e => e.AspNetUsersId)
             //    .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<UserInfo>()
                 .HasMany(e => e.UserTablaus)
                 .WithRequired(e => e.UserInfo)
-                .HasForeignKey(e => e.UserID)
+                .HasForeignKey(e => e.AspNetUsersId)
                 .WillCascadeOnDelete(false);
         }
     }
