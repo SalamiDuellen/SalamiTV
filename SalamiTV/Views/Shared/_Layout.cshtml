@@ -52,7 +52,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="/"><span class="glyphicon glyphicon-home"></span></a></li>
                     <li><a href="/">Tablå</a></li>
-                    <li><a href=@Html.ActionLink("Om oss", "About", "Home")></a></li>
+                    <li>@Html.ActionLink("Om oss", "About", "Home")</li>
                     <li><a href="/Home/Contact">Kontakta oss</a></li>
                 </ul>
                 <form class="navbar-form navbar-left" autocomplete="off" id="topnavsearch" action="/action_page.php">
@@ -66,7 +66,17 @@
                     </div>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/"><span class="glyphicon glyphicon-log-in"></span> Min sida</a></li>
+                    <li>
+                        @*kommer direkt till loginsindan*@
+                        @if (!Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Min sida", "Login", "Account")<span class="glyphicon glyphicon-log-in"></span>
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Logga av", "LogOff", "Account")<span class="glyphicon glyphicon-log-in"></span>
+                        }
+                    </li>
                 </ul>
             </div>
         </div>

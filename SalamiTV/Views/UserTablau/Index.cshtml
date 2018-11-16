@@ -1,40 +1,111 @@
 ﻿@model IEnumerable<SalamiTV.Models.UserTablau>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Min sida";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Min sida</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TvChannel.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.UserInfo.UserName)
-        </th>
-        <th></th>
-    </tr>
+@*@{
+        Html.RenderAction("PartialTvChannel", "Home", new { id = 1 });
+    }*@
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TvChannel.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.UserInfo.UserName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
 
-</table>
+
+<div class="container-fluid">
+    <div id="tvchannel">
+        <div class="row">
+
+            @foreach (var item in Model)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-3">
+
+                    <div id="channelheader">
+                        <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
+                    </div>
+
+                    <ul class="list-group">
+                        @foreach (var thing in item.TvChannel.TvPrograms)
+                        {
+
+                            <li class="list-group-item">
+                                @Html.DisplayFor(modelItem => thing.Title)
+                                @Html.DisplayFor(modelItem => thing.Details)
+                                <br />
+
+                                @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
+                                @foreach (var cat in thing.TvProgramCategories)
+                                {
+                                    @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                }
+                            </li>
+
+                            @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
+
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@*<table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.TvChannel.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserInfo.ID)
+                </th>
+                <th></th>
+            </tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserInfo.UserName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+            </tr>
+        </table>
+    <div class="container-fluid">
+        <div id="tvchannel">
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+
+                        <div id="channelheader">
+                            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                        </div>
+
+                        <ul class="list-group">
+                            @foreach (var thing in item.TvPrograms)
+                            {
+
+                                <li class="list-group-item">
+                                    @Html.DisplayFor(modelItem => thing.Title)
+                                    @Html.DisplayFor(modelItem => thing.Details)
+                                    <br />
+
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
+                                    @foreach (var cat in thing.TvProgramCategories)
+                                    {
+                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                    }
+                                </li>
+
+                                @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
+
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@

@@ -8,6 +8,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SalamiTV.Models;
+using Microsoft.AspNet.Identity;
+
 
 namespace SalamiTV.Controllers
 {
@@ -19,7 +21,9 @@ namespace SalamiTV.Controllers
         public async Task<ActionResult> Index()
         {
 
-            var userTablaus = db.UserTablaus.Include(u => u.TvChannel).Include(u => u.UserInfo);
+            var userId = HttpContext.User.Identity.GetUserId();
+
+            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
             return View(await userTablaus.ToListAsync());
         }
 
@@ -68,18 +72,22 @@ namespace SalamiTV.Controllers
         // GET: UserTablau/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {
-            if (id == null)
+            //Hämtar id för AspNetUsers från databasen
+            var userId = HttpContext.User.Identity.GetUserId();
+
+            if (userId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
-            if (userTablau == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
-            return View(userTablau);
+            //Hämtar userns individuella tablå (kanalerna hen valt)
+            var userTablaus = await db.UserTablaus.Include(y => y.TvChannel).FirstOrDefaultAsync(x => x.AspNetUsersId == userId).ConfigureAwait(false);
+
+            //Ska hämta alla kanaler för att användaren ska kunna lägga till dem till sin tablå
+            var tvChannels = db.TvChannels.Select(x => x);
+            //Skickar in kanalerna till vyn eftersom det itne finns någon vuymodell för skiten
+            ViewBag.TvChannels = tvChannels;
+        
+            return View(userTablaus);
         }
 
         // POST: UserTablau/Edit/5

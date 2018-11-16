@@ -13,7 +13,14 @@ namespace SalamiTV.Controllers
 {
     public class TvChannelController : Controller
     {
-        private SalamiTVDB db = new SalamiTVDB();
+        private SalamiTVDB salamiContext = new SalamiTVDB();
+
+        //[ChildActionOnly]
+        public async Task<ActionResult> PartialTvChannel(int id)
+        {
+            var channel = await salamiContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
+            return PartialView(channel);
+        }
 
         // GET: TvChannel
         public async Task<ActionResult> Index(int? id)
@@ -22,12 +29,12 @@ namespace SalamiTV.Controllers
 
             if (id != null)
             {
-                TvChannel tvChannel = await db.TvChannels.FindAsync(id);
+                TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
 
                 list.Add(tvChannel);
                 return View(list);
             }
-            return View(await db.TvChannels.ToListAsync());
+            return View(await salamiContext.TvChannels.ToListAsync());
         }
 
         // GET: TvChannel/Details/5
@@ -37,7 +44,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvChannel tvChannel = await db.TvChannels.FindAsync(id);
+            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
             if (tvChannel == null)
             {
                 return HttpNotFound();
@@ -60,8 +67,8 @@ namespace SalamiTV.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.TvChannels.Add(tvChannel);
-                await db.SaveChangesAsync();
+                salamiContext.TvChannels.Add(tvChannel);
+                await salamiContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -75,7 +82,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvChannel tvChannel = await db.TvChannels.FindAsync(id);
+            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
             if (tvChannel == null)
             {
                 return HttpNotFound();
@@ -92,8 +99,8 @@ namespace SalamiTV.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tvChannel).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                salamiContext.Entry(tvChannel).State = EntityState.Modified;
+                await salamiContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(tvChannel);
@@ -106,7 +113,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvChannel tvChannel = await db.TvChannels.FindAsync(id);
+            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
             if (tvChannel == null)
             {
                 return HttpNotFound();
@@ -119,9 +126,9 @@ namespace SalamiTV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            TvChannel tvChannel = await db.TvChannels.FindAsync(id);
-            db.TvChannels.Remove(tvChannel);
-            await db.SaveChangesAsync();
+            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
+            salamiContext.TvChannels.Remove(tvChannel);
+            await salamiContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -129,7 +136,7 @@ namespace SalamiTV.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                salamiContext.Dispose();
             }
             base.Dispose(disposing);
         }
