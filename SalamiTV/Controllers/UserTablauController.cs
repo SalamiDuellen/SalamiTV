@@ -70,24 +70,23 @@ namespace SalamiTV.Controllers
         }
 
         // GET: UserTablau/Edit/5
-        public async Task<ActionResult> Edit(int? id)
+        public async Task<ActionResult> Edit(UserTablauAddViewModel addChannel)
         {
             //Hämtar id för AspNetUsers från databasen
-            var userId = HttpContext.User.Identity.GetUserId();
+            addChannel.AspNetUsersId = HttpContext.User.Identity.GetUserId();
 
-            if (userId == null)
+            if (addChannel.AspNetUsersId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Hämtar userns individuella tablå (kanalerna hen valt)
-            var userTablaus = await db.UserTablaus.Include(y => y.TvChannel).FirstOrDefaultAsync(x => x.AspNetUsersId == userId).ConfigureAwait(false);
+            addChannel.UserTablau = await db.UserTablaus.Include(y => y.TvChannel).FirstOrDefaultAsync(x => x.AspNetUsersId == addChannel.AspNetUsersId).ConfigureAwait(false);
 
             //Ska hämta alla kanaler för att användaren ska kunna lägga till dem till sin tablå
-            var tvChannels = db.TvChannels.Select(x => x);
+            addChannel.AvailibleChannels = db.TvChannels.Select(x => x);
             //Skickar in kanalerna till vyn eftersom det itne finns någon vuymodell för skiten
-            ViewBag.TvChannels = tvChannels;
         
-            return View(userTablaus);
+            return View(addChannel);
         }
 
         // POST: UserTablau/Edit/5
