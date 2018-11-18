@@ -211,6 +211,7 @@
     <Compile Include="Models\TvProgramCategory.cs" />
     <Compile Include="Models\UserInfo.cs" />
     <Compile Include="Models\UserTablau.cs" />
+    <Compile Include="Models\UserTablauAddViewModel.cs" />
     <Compile Include="Models\UserTablauViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />

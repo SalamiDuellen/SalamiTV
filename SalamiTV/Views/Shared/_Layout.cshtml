@@ -70,11 +70,17 @@
                         @*kommer direkt till loginsindan*@
                         @if (!Request.IsAuthenticated)
                         {
-                            @Html.ActionLink("Min sida", "Login", "Account")<span class="glyphicon glyphicon-log-in"></span>
+                        <a href="~/Account/Login">
+                            Logga in
+                            <span class="glyphicon glyphicon-log-in"></span>
+                        </a>
                         }
                         else
                         {
-                            @Html.ActionLink("Logga av", "LogOff", "Account")<span class="glyphicon glyphicon-log-in"></span>
+                        <a href="~/Account/LogOff">
+                            Logga ut
+                            <span class="glyphicon glyphicon-log-in"></span>
+                        </a>
                         }
                     </li>
                 </ul>
