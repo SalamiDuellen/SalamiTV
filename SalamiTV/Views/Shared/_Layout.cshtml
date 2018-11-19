@@ -68,19 +68,20 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         @*kommer direkt till loginsindan*@
-                        @if (!Request.IsAuthenticated)
+                        @if (!Context.User.Identity.IsAuthenticated)
                         {
-                        <a href="~/Account/Login">
-                            Logga in
-                            <span class="glyphicon glyphicon-log-in"></span>
-                        </a>
+                            <a href="~/Account/Login">
+                                Logga in
+                                <span class="glyphicon glyphicon-log-in"></span>
+                            </a>
                         }
                         else
                         {
-                        <a href="~/Account/LogOff">
-                            Logga ut
-                            <span class="glyphicon glyphicon-log-in"></span>
-                        </a>
+                            <a href="~/Account/LogOff">
+                                @Context.User.Identity.Name
+                                Logga ut
+                                <span class="glyphicon glyphicon-log-in"></span>
+                            </a>
                         }
                     </li>
                 </ul>
