@@ -44,16 +44,23 @@
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
                 <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
             </ol>
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner" role="listbox">
                 <div class="item active">
-                    <img src="Images/samycketbattre.jpg" alt="Så mycket bättre">
+                    <img src="~/Images/samycketbattre.jpg" alt="Så mycket bättre">
                 </div>
 
                 <div class="item">
-                    <img src="Images/aktuellt.jpg" alt="Aktuellt">
+                    <img src="~/Images/aktuellt.jpg" alt="Aktuellt">
+                    <div class="carousel-caption">
+                    </div>
+                </div>
+
+                <div class="item">
+                    <img src="~/Images/avengers_thanos.jpg" alt="Avengers">
                     <div class="carousel-caption">
                     </div>
                 </div>
@@ -92,7 +99,7 @@
 
                             <li class="list-group-item">
                                 @Html.DisplayFor(modelItem => thing.Title)
-                                @Html.DisplayFor(modelItem => thing.Details)
+                                @*@Html.DisplayFor(modelItem => thing.Details)*@
                                 <br />
 
                                 @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
