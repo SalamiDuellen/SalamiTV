@@ -1,4 +1,4 @@
-﻿@model SalamiTV.Models.UserTablauAddViewModel
+﻿@model SalamiTV.Models.UserTablau
 
 @{
     ViewBag.Title = "Edit";
@@ -7,39 +7,36 @@
 
 <h2>Edit</h2>
 
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>UserTablau</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID)
 
-        @*printas till GUI*@
         <div class="form-group">
-            @Html.LabelFor(model => model.Name)
+            @Html.LabelFor(model => model.TvChannelID, "TvChannelID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                <ul>
-                    @foreach (var item in Model.AvailibleChannels)
-                    {
-                        <li>
-                            @Html.DisplayFor(modelItem=> item.Name)
-                        </li>
-                    }
-                </ul>
-                @Html.ValidationMessageFor(model => model.TvChannel.Name, "", new { @class = "text-danger" })
+                @Html.DropDownList("TvChannelID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TvChannelID, "", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="form-group">
+            @Html.LabelFor(model => model.TvChannels, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.TvChannels, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TvChannels, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
-        @*Printar värdet för id för att kunna ändras. ID ska inte kuna ändras utan är enbart för test*@
         <div class="form-group">
             @Html.LabelFor(model => model.AspNetUsersId, "AspNetUsersId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DisplayFor(model => model.AspNetUsersId)
+                @Html.DropDownList("AspNetUsersId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AspNetUsersId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -55,7 +52,3 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
