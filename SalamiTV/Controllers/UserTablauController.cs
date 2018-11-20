@@ -20,19 +20,30 @@ namespace SalamiTV.Controllers
         public async Task<ActionResult> Index()
         {
             var userId = HttpContext.User.Identity.GetUserId();
-            //var userTablau = db.TvChannels.Select(x=>x.TvPrograms).Where()
+
             var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+
+            return View(await userTablaus.ToListAsync());
+        }
+         public async Task<ActionResult> AddChannelToTablau()
+        {
+            var userId = HttpContext.User.Identity.GetUserId();
+
+            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+
             return View(await userTablaus.ToListAsync());
         }
 
+
+
         // GET: UserTablau/Details/5
-        public async Task<ActionResult> Details(int? id)
+        public async Task<ActionResult> Details(UserTablau userTablau)
         {
-            if (id == null)
+            if (userTablau.ID == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+             userTablau = await db.UserTablaus.FindAsync(userTablau.ID);
             if (userTablau == null)
             {
                 return HttpNotFound();

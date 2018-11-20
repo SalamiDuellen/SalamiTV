@@ -10,13 +10,13 @@
 <div class="container-fluid">
     <div id="tvchannel">
         <div class="row">
-
             @foreach (var item in Model)
             {
                 <div class="col-xs-12 col-sm-6 col-md-3">
 
                     <div id="channelheader">
                         <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
+                        <h4>@Html.DisplayFor(modelItem => item.ID)</h4>
                     </div>
 
                     <ul class="list-group">
@@ -35,7 +35,7 @@
                                 }
                             </li>
 
-                            @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
+                            @Html.ActionLink("Details", "Details", "UserTablau", new { id = item.ID }, null)
 
                         }
                     </ul>

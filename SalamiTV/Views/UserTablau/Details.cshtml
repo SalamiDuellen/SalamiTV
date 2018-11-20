@@ -2,7 +2,6 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Details</h2>
@@ -24,15 +23,15 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.UserInfo.UserName)
+            @Html.DisplayFor(model => model.AspNetUsersId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TvChannels)
+            @*@Html.DisplayNameFor(model => model.)*@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TvChannels)
+            @Html.DisplayFor(model => model.TvChannel.TvPrograms)
         </dd>
 
     </dl>

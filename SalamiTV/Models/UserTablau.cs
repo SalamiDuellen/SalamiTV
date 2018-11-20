@@ -9,7 +9,7 @@ namespace SalamiTV.Models
     [Table("UserTablau")]
     public partial class UserTablau
     {
-        public int ID { get; set; }
+        public int? ID { get; set; }
 
         public int TvChannelID { get; set; }
 
