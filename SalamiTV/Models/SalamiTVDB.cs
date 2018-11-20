@@ -19,7 +19,8 @@ namespace SalamiTV.Models
         public virtual DbSet<TvProgramCategory> TvProgramCategories { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
         //public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<UserTablau> UserTablaus { get; set; }
+        public virtual DbSet<UserTablau> UserTablaus { get; set; } // ska det ändras till bara userid och tvid? 
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

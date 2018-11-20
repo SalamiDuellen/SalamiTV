@@ -1,4 +1,4 @@
-﻿@model SalamiTV.Models.UserTablau
+﻿@model  SalamiTV.Models.UserTablauAddViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -8,28 +8,31 @@
 <h2>Create</h2>
 
 
-@*@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>UserTablau</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.LabelFor(model => model.TvChannelID, "TvChannelID", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model, "TvChannelID", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("TvChannelID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TvChannelID, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.TvChannelID, Model.AvalibleTvChannels, null, htmlAttributes: new { @class = "form-control" })
+                @*@Html.ValidationMessageFor(model => model.Select(x=>x.), "", new { @class = "text-danger" })*@
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
-            </div>
+            @*@Html.LabelFor(model => model.UserInfo.UserName, "Användarnamn", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @Html.Hidden(Context.User.Identity.Name, null, htmlAttributes: new { @class = "form-control" })
+            @*@Html.ValidationMessageFor(model => model.AspNetUsersId, "", new { @class = "text-danger" })*@
+
+
+            @*<div class="col-md-10">
+                    @Html.ValidationMessageFor(model => model.AspNetUsersId, "", new { @class = "text-danger" })
+                </div>*@
         </div>
 
         <div class="form-group">
@@ -41,8 +44,8 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
-</div>*@
+    7    @Html.ActionLink("Back to List", "Index")
+</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

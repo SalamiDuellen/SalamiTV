@@ -45,9 +45,13 @@ namespace SalamiTV.Controllers
         // GET: UserTablau/Create
         public ActionResult Create()
         {
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name");
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName");
-            return View();
+            UserTablauAddViewModel viewModel = new UserTablauAddViewModel
+            {
+                // levererear null. Funkish inte!
+                //id = HttpContext.User.Identity.GetUserId();
+                AvalibleTvChannels = new SelectList(db.TvChannels.Select(x => x.Name))
+            };
+            return View(viewModel);
         }
 
         // POST: UserTablau/Create
@@ -55,23 +59,29 @@ namespace SalamiTV.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,TvChannelID,AspNetUsersId")] UserTablau userTablau)
+        public async Task<ActionResult> Create([Bind(Include = "TvChannelID,AspNetUsersId")] UserTablauAddViewModel model)
         {
+            var tvChannelID = HttpContext.User.Identity;
+            var AspNetUsersId = model.AspNetUsersId;
             if (ModelState.IsValid)
             {
-                db.UserTablaus.Add(userTablau);
+                db.Entry(model).State = EntityState.Modified;
+
+                //db.UserTablaus.Add(model); // ska jag skapa en dbset av vymodellen?
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
-            return View(userTablau);
+            //ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            //ViewBag.UserID = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            return View(model);
         }
 
         // GET: UserTablau/Edit/5
         public async Task<ActionResult> Edit(UserTablauAddViewModel addChannel)
         {
+            //Kanske inte ska vara här... 
+
             //Hämtar id för AspNetUsers från databasen
             addChannel.AspNetUsersId = HttpContext.User.Identity.GetUserId();
 
@@ -80,12 +90,9 @@ namespace SalamiTV.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             //Hämtar userns individuella tablå (kanalerna hen valt)
-            addChannel.UserTablau = await db.UserTablaus.Include(y => y.TvChannel).FirstOrDefaultAsync(x => x.AspNetUsersId == addChannel.AspNetUsersId).ConfigureAwait(false);
+            //addChannel.UserTablau = await db.UserTablaus.Include(y => y.TvChannel).FirstOrDefaultAsync(x => x.AspNetUsersId == addChannel.AspNetUsersId).ConfigureAwait(false);
 
-            //Ska hämta alla kanaler för att användaren ska kunna lägga till dem till sin tablå
-            addChannel.AvailibleChannels = db.TvChannels.Select(x => x);
-            //Skickar in kanalerna till vyn eftersom det itne finns någon vuymodell för skiten
-        
+
             return View(addChannel);
         }
 
