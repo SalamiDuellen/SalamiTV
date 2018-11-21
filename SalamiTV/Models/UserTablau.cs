@@ -11,7 +11,7 @@ namespace SalamiTV.Models
     {
         public int? ID { get; set; }
 
-        public int TvChannelID { get; set; }
+        public int? TvChannelID { get; set; }
 
         public string AspNetUsersId { get; set; }
         public virtual TvChannel TvChannel { get; set; }

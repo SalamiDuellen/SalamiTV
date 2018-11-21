@@ -25,11 +25,41 @@ namespace SalamiTV.Controllers
 
             return View(await userTablaus.ToListAsync());
         }
-         public async Task<ActionResult> AddChannelToTablau()
-        {
-            var userId = HttpContext.User.Identity.GetUserId();
 
-            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+        public ActionResult AddChannelToTablau()
+        {
+            var channels = db.TvChannels.Select(x => x);
+
+            var userId = HttpContext.User.Identity.GetUserId();// behöver denna vara här? 
+
+            return View(channels.ToList());
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddChannelToTablau(TvChannel tvChannel)
+        {
+            /*
+             * Fullösningar is da new black!
+             * Tar ut en tvChannel från vyn och konverterar den till userTablau som kan skickas till databasen. 
+             * Model.IsValid fun
+             */
+            var userID = HttpContext.User.Identity.GetUserId();
+            UserTablau userTablau = new UserTablau()
+            {
+                TvChannelID = tvChannel.ID,
+                AspNetUsersId = HttpContext.User.Identity.GetUserId()
+            };
+
+            if (userTablau.AspNetUsersId != null && userTablau.TvChannelID != null)
+            {
+                db.UserTablaus.Add(userTablau);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Index");
+            }
+
+            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userID).Include(u => u.TvChannel);
+
 
             return View(await userTablaus.ToListAsync());
         }
@@ -43,7 +73,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-             userTablau = await db.UserTablaus.FindAsync(userTablau.ID);
+            userTablau = await db.UserTablaus.FindAsync(userTablau.ID);
             if (userTablau == null)
             {
                 return HttpNotFound();
@@ -116,6 +146,7 @@ namespace SalamiTV.Controllers
         // GET: UserTablau/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
+            //Måste ha ID för usertablau så att hela raden raderas
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
