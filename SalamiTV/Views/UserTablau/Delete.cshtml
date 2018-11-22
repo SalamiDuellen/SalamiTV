@@ -1,7 +1,7 @@
 ﻿@model SalamiTV.Models.UserTablau
 
 @{
-    Layout = null;
+    ViewBag.Title = "Ta bort kanal från tablån";//Delete
 }
 
 <!DOCTYPE html>
@@ -35,7 +35,7 @@
 
         </dl>
 
-        @using (Html.BeginForm("AddChannelToTablau", "UserTablau", FormMethod.Post))
+        @using (Html.BeginForm("Delete", "UserTablau", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 

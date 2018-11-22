@@ -213,7 +213,6 @@
     <Compile Include="Models\UserTablau.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\AddToTablauViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-grid.css" />
@@ -335,6 +334,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

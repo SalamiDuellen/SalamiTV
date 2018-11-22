@@ -21,13 +21,14 @@ namespace SalamiTV.Controllers
         {
             var userId = HttpContext.User.Identity.GetUserId();
 
-            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+            var userTablaus = db.UserTablaus.Where(x=>x.AspNetUsersId==userId).Include(u=>u.TvChannel);
 
             return View(await userTablaus.ToListAsync());
         }
 
         public ActionResult AddChannelToTablau()
         {
+
             var channels = db.TvChannels.Select(x => x);
 
             var userId = HttpContext.User.Identity.GetUserId();// behöver denna vara här? 
