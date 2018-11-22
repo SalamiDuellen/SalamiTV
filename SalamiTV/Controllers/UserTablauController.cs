@@ -17,6 +17,7 @@ namespace SalamiTV.Controllers
         private SalamiTVDB db = new SalamiTVDB();
 
         // GET: UserTablau
+        //asynk för att den ena querien ska vänta in den andra. Vet dock inte om det behövs här
         public async Task<ActionResult> Index()
         {
             var userId = HttpContext.User.Identity.GetUserId();
@@ -42,7 +43,7 @@ namespace SalamiTV.Controllers
             /*
              * Fullösningar is da new black!
              * Tar ut en tvChannel från vyn och konverterar den till userTablau som kan skickas till databasen. 
-             * Model.IsValid fun
+             * Model.IsValid funkar inte eftersom det är en tvkanal som kommer från vyn men en usertablau som ska in till databasen
              */
             var userID = HttpContext.User.Identity.GetUserId();
             UserTablau userTablau = new UserTablau()
@@ -146,7 +147,7 @@ namespace SalamiTV.Controllers
         // GET: UserTablau/Delete/5
         public async Task<ActionResult> Delete(int? id)
         {
-            //Måste ha ID för usertablau så att hela raden raderas
+            //id är PK för usertablau i databasen.Raderar hela raden, kanske skulle haft datum på raden? Skyller på GDPR att man inte ska spara info mer än nöädvändigt
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -164,12 +165,14 @@ namespace SalamiTV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
+            // Genomför själva raderingen.. Sparar och ätervänder till förstasidan på min sida
             UserTablau userTablau = await db.UserTablaus.FindAsync(id);
             db.UserTablaus.Remove(userTablau);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
+        //rensar querystängen
         protected override void Dispose(bool disposing)
         {
             if (disposing)
