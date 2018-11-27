@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalamiTV.Models.TvChannel>
+﻿@model IEnumerable<SalamiTV.Models.TvProgram>
 
 @{
     ViewBag.Title = "Programtablå";
@@ -20,7 +20,9 @@
                     </a>
                 </li>
                 @*ska få in värdet på datetime.now här för pagingen*@
-                <li><a href="#">Idag</a></li>
+                @*<li><a href="#">Idag</a></li>*@
+                <li>@Html.ActionLink("Idag", "Index", "Home", new { page =1})</li>
+                <li>@Html.ActionLink("Imorgon", "Index", new { page =2})</li>
                 <li><a href="#">Imorgon</a></li>
                 <li><a href="#">7/11 Ons</a></li>
                 <li><a href="#">8/11 Tor</a></li>
@@ -91,11 +93,11 @@
                 <div class="col-xs-12 col-sm-6 col-md-3">
 
                     <div id="channelheader">
-                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                        <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
                     </div>
 
                     <ul class="list-group">
-                        @foreach (var thing in item.TvPrograms)
+                        @foreach (var thing in item.TvChannel.TvPrograms)
                         {
 
                             <li class="list-group-item">

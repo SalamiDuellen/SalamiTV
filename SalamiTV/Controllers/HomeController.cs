@@ -17,39 +17,49 @@ namespace SalamiTV.Controllers
     {
         SalamiTVDB salamiContext = new SalamiTVDB();
 
-        public ViewResult Index(DateTime searchDate, DateTime pageDate, int? page)
-        {
-            // För att skicka med sökdatumet under hela actionen
-            ViewBag.CurrentDate = searchDate;
-            var programs = salamiContext.TvChannels.SelectMany(x => x.TvPrograms);
-
-            if (!String.IsNullOrEmpty(searchDate.ToString()))
-            {
-                programs = programs.Where(x => x.Broadcasting == searchDate);
-            }
-
-            // återkommer till första sidan om page är null.
-            int pageNumber = (page ?? 1);
-            if (pageNumber == 1)
-            {
-                pageDate = Convert.ToDateTime(DateTime.Now.Day);// ingen aning om detta kan funka
-            }
-            else
-            {
-                // Är tänkt att utgå från dagens datum och sedan lägga på dagar utefter sökta sidan
-                pageDate = Convert.ToDateTime(DateTime.Now.AddDays(page.Value));
-            }
-
-            return View();
-        }
-
-        //public ActionResult Index()
+        //public ViewResult Index(DateTime searchDate, DateTime pageDate, int? page)
         //{
+        //    // För att skicka med sökdatumet under hela actionen
+        //    ViewBag.CurrentDate = searchDate;
+        //    var programs = salamiContext.TvChannels.SelectMany(x => x.TvPrograms);
 
-        //    var program = salamiContext.TvChannels.Select(x => x);//Printar tvprogrammen i som finns i programcategories
+        //    if (!String.IsNullOrEmpty(searchDate.ToString()))
+        //    {
+        //        programs = programs.Where(x => x.Broadcasting == searchDate);
+        //    }
 
-        //    return View(program.ToList());
+        //    // återkommer till första sidan om page är null.
+        //    int pageNumber = (page ?? 1);
+        //    if (pageNumber == 1)
+        //    {
+        //        pageDate = Convert.ToDateTime(DateTime.Now.Day);// ingen aning om detta kan funka
+        //    }
+        //    else
+        //    {
+        //        // Är tänkt att utgå från dagens datum och sedan lägga på dagar utefter sökta sidan
+        //        pageDate = Convert.ToDateTime(DateTime.Now.AddDays(page.Value));
+        //    }
+
+        //    return View();
         //}
+
+
+        public ActionResult Index(int? page)
+        {
+            //Försöker formattesra om datetime så att man bara söker på datumet
+            // Går sådär.... :@
+            var date = DateTime.Now.Date;
+            int pageNumber = (page ?? 1);
+            if (pageNumber != 1)
+            {
+                date = DateTime.Now.AddDays(page.Value - 1).Date;
+
+            }
+            var channels = salamiContext.TvPrograms.Where(p => p.Broadcasting == date).Include(p => p.TvChannel);
+
+            //var program = salamiContext.TvChannels.Select(x => x);//Printar tvprogrammen i som finns i programcategories
+            return View(channels.ToList());
+        }
 
         [ChildActionOnly]
         public async Task<ActionResult> PartialTvChannel(int id)
