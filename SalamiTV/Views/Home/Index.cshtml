@@ -22,7 +22,8 @@
                 @*ska få in värdet på datetime.now här för pagingen*@
                 @*<li><a href="#">Idag</a></li>*@
                 <li>@Html.ActionLink("Idag", "Index", "Home", new { page =1})</li>
-                <li>@Html.ActionLink("Imorgon", "Index", new { page =2})</li>
+                <li>@Html.ActionLink("Imorgon", "Index", "Home", new { page =2})</li>
+                <li>@Html.ActionLink("Idag", "Index", "Home", new { page =1})</li>
                 <li><a href="#">Imorgon</a></li>
                 <li><a href="#">7/11 Ons</a></li>
                 <li><a href="#">8/11 Tor</a></li>
@@ -88,7 +89,7 @@
     <div id="tvchannel">
         <div class="row">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.)
             {
                 <div class="col-xs-12 col-sm-6 col-md-3">
 

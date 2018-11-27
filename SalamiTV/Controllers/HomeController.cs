@@ -48,17 +48,19 @@ namespace SalamiTV.Controllers
         {
             //Försöker formattesra om datetime så att man bara söker på datumet
             // Går sådär.... :@
-            var date = DateTime.Now.Date;
+            var searchDate = DateTime.Today.Date;
+            //returnerar dagen efter den sökta dagen
             int pageNumber = (page ?? 1);
+
             if (pageNumber != 1)
             {
-                date = DateTime.Now.AddDays(page.Value - 1).Date;
-
+                searchDate = DateTime.Now.AddDays(page.Value - 1).Date;
             }
-            var channels = salamiContext.TvPrograms.Where(p => p.Broadcasting == date).Include(p => p.TvChannel);
-
+            var tomorrow = searchDate.AddDays(1);
+            //var channels = salamiContext.TvPrograms.Where(p => p.Broadcasting == date).Include(p => p.TvChannel); 
+            var tvProgram = salamiContext.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow).Include(p => p.TvChannel);
             //var program = salamiContext.TvChannels.Select(x => x);//Printar tvprogrammen i som finns i programcategories
-            return View(channels.ToList());
+            return View(tvProgram.ToList());
         }
 
         [ChildActionOnly]
