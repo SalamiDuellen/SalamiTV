@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using SalamiTV.ViewModels;
 
 namespace SalamiTV.Controllers
 {
@@ -46,21 +47,20 @@ namespace SalamiTV.Controllers
 
         public ActionResult Index(int? page)
         {
-            //Försöker formattesra om datetime så att man bara söker på datumet
-            // Går sådär.... :@
-            var searchDate = DateTime.Today.Date;
-            //returnerar dagen efter den sökta dagen
-            int pageNumber = (page ?? 1);
 
-            if (pageNumber != 1)
-            {
-                searchDate = DateTime.Now.AddDays(page.Value - 1).Date;
-            }
+            HomePageVM hpVM = new HomePageVM();
+
+            //Sätter pagenumber till 0 om värdet är null
+            int pageNumber = (page ?? 0);
+
+            var searchDate = DateTime.Now.AddDays(pageNumber).Date;
             var tomorrow = searchDate.AddDays(1);
-            //var channels = salamiContext.TvPrograms.Where(p => p.Broadcasting == date).Include(p => p.TvChannel); 
-            var tvProgram = salamiContext.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow).Include(p => p.TvChannel);
-            //var program = salamiContext.TvChannels.Select(x => x);//Printar tvprogrammen i som finns i programcategories
-            return View(tvProgram.ToList());
+
+            // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
+            salamiContext.Configuration.LazyLoadingEnabled = false;
+            hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList();
+
+            return View(hpVM);
         }
 
         [ChildActionOnly]

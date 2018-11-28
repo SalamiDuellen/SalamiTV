@@ -1,13 +1,14 @@
-﻿@model IEnumerable<SalamiTV.Models.TvProgram>
+﻿@*@model IEnumerable<SalamiTV.Models.TvChannel>*@
+@model SalamiTV.ViewModels.HomePageVM
 
 @{
     ViewBag.Title = "Programtablå";
 }
 
 @*@{
-    // Kan returnera en lista baserad på users id
-    Html.RenderAction("PartialTvChannel", "Home", new { id = Model});
-}*@
+        // Kan returnera en lista baserad på users id
+        Html.RenderAction("PartialTvChannel", "Home", new { id = Model});
+    }*@
 
 
 <div class="container">
@@ -21,15 +22,23 @@
                 </li>
                 @*ska få in värdet på datetime.now här för pagingen*@
                 @*<li><a href="#">Idag</a></li>*@
-                <li>@Html.ActionLink("Idag", "Index", "Home", new { page =1})</li>
-                <li>@Html.ActionLink("Imorgon", "Index", "Home", new { page =2})</li>
-                <li>@Html.ActionLink("Idag", "Index", "Home", new { page =1})</li>
-                <li><a href="#">Imorgon</a></li>
-                <li><a href="#">7/11 Ons</a></li>
-                <li><a href="#">8/11 Tor</a></li>
-                <li><a href="#">9/11 Fre</a></li>
-                <li><a href="#">10/11 Lör</a></li>
-                <li><a href="#">11/11 Sön</a></li>
+                @for (int i = 0; i < Model.Dates.Count; i++)
+                {
+                    <li>@Html.ActionLink(Model.Dates[i], "Index", new { page = i })</li>
+
+                }
+                @*<li>@Html.ActionLink("Idag", "Index", new { page = 1 })</li>
+                <li>@Html.ActionLink("Imorgon", "Index", new { page = 2 })</li>
+                <li>@Html.ActionLink("Övermorgon", "Index", new { page = 3 })</li>
+                <li>@Html.ActionLink("Ännu senare", "Index", new { page = 4 })</li>
+                <li>@Html.ActionLink("Ännu senare +1", "Index", new { page = 5 })</li>*@
+                @*<li>@Html.ActionLink("Imorgon", "Index", new { page = 2 })</li>
+        <li><a href="#">Imorgon</a></li>
+        <li><a href="#">7/11 Ons</a></li>
+        <li><a href="#">8/11 Tor</a></li>
+        <li><a href="#">9/11 Fre</a></li>
+        <li><a href="#">10/11 Lör</a></li>
+        <li><a href="#">11/11 Sön</a></li>*@
                 <li>
                     <a href="#" aria-label="Nästa">
                         <span aria-hidden="true">&raquo;</span>
@@ -89,18 +98,16 @@
     <div id="tvchannel">
         <div class="row">
 
-            @foreach (var item in Model)
+            @foreach (var item in Model.TvChannels)
             {
                 <div class="col-xs-12 col-sm-6 col-md-3">
-
                     <div id="channelheader">
-                        <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
+                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
                     </div>
 
                     <ul class="list-group">
-                        @foreach (var thing in item.TvChannel.TvPrograms)
+                        @foreach (var thing in item.TvPrograms)
                         {
-
                             <li class="list-group-item">
                                 @Html.DisplayFor(modelItem => thing.Title)
                                 @*@Html.DisplayFor(modelItem => thing.Details)*@
@@ -114,7 +121,6 @@
                             </li>
 
                             @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
-
                         }
                     </ul>
                 </div>
