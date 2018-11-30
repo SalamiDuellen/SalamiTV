@@ -93,6 +93,9 @@ textarea {
     background-color: #eaf3f7;
     min-height: 50px;
 }
+.list-group .list-group-item span {
+    position:relative;
+}
 /*Vet inte om denna behövs...*/
 .hiddenitem {
     display: none;

@@ -29,7 +29,7 @@
         </nav>
     </div>
 </div>
- 
+
 @* Carousel *@
 <div class="container">
     <div class="row">
@@ -77,39 +77,37 @@
 <div class="container-fluid">
     <div id="tvchannel">
         <div class="row">
-                @foreach (var item in Model.TvChannels)
-                {
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div id="channelheader">
-                            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-                        </div>
-                        <ul class="list-group">
-                            @foreach (var thing in item.TvPrograms)
-                            {
-                                <li class="list-group-item">
-                                    <span class="visibleitem">
-                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
-                                        <br />
-                                        @Html.DisplayFor(modelItem => thing.Title)
-                                        <br />
-
-                                    </span>
-                                    <span class="hiddenitem">
-                                        @Html.DisplayFor(modelItem => thing.Details)<br />
-
-                                        @foreach (var cat in thing.TvProgramCategories)
-                                        {
-                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                        }
-
-                                        <br />
-                                        @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
-                                    </span>
-                                </li>
-                            }
-                        </ul>
+            @foreach (var item in Model.TvChannels)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div id="channelheader">
+                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
                     </div>
-                }
+                    <ul class="list-group">
+                        @foreach (var thing in item.TvPrograms)
+                        {
+                            <li class="list-group-item">
+                                <span class="visibleitem" style="height:100px; width:100px;">
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
+                                    <br/>
+                                    @Html.DisplayFor(modelItem => thing.Title)
+                                    <br />
+
+                                </span>
+                                <span class="hiddenitem">
+                                    @Html.DisplayFor(modelItem => thing.Details)<br />
+                                    @foreach (var cat in thing.TvProgramCategories)
+                                    {
+                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                    }
+                                    <br />
+                                    @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
+                                </span>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            }
         </div>
     </div>
 </div>
