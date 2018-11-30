@@ -81,13 +81,26 @@ textarea {
     border: 2px solid #BDD4DE;
     border-top-width: 1px;
     /*background-color: #eaf3f7;*/
-} 
+}
+
 .list-group-item {
-    border: none;
+    border: solid;
+    border-color: lightgray;
+    border-width: 1px;
     padding: 1% 4% 1% 4%;
     margin: 0%;
     font-size: 12px;
     background-color: #eaf3f7;
+    min-height: 50px;
+}
+/*Vet inte om denna behövs...*/
+.hiddenitem {
+    display: none;
+}
+
+#aboutusimage img {
+    max-height: 100px;
+    min-width: 100px;
 }
 
 .row {

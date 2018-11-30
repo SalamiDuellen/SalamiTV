@@ -86,36 +86,44 @@
 <div class="container-fluid">
     <div id="tvchannel">
         <div class="row">
-
-            @foreach (var item in Model.TvChannels)
-            {
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div id="channelheader">
-                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-                    </div>
-                    <ul class="list-group">
-                        @foreach (var thing in item.TvPrograms)
-                        {
+            <form>
+                @foreach (var item in Model.TvChannels)
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div id="channelheader">
+                            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                        </div>
+                        <ul class="list-group">
+                            @foreach (var thing in item.TvPrograms)
+                            {
                             <li class="list-group-item">
-                                @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
-                                <br />
-                                @Html.DisplayFor(modelItem => thing.Title)<br />
-                                @Html.DisplayFor(modelItem => thing.Details)<br />
+                                <span class="visibleitem">
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(8)
+                                    <br />
+                                    @Html.DisplayFor(modelItem => thing.Title)
+                                    <br />
 
-                                @foreach (var cat in thing.TvProgramCategories)
-                                {
-                                    @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                }
-                                @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
-                                <br />
+                                </span>
+                                <span class="hiddenitem">
+                                    @Html.DisplayFor(modelItem => thing.Details)<br />
+
+                                    @foreach (var cat in thing.TvProgramCategories)
+                                    {
+                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                    }
+
+                                    @*@Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)*@
+                                    @*<br />*@
+                                </span>
                             </li>
-                        }
-                    </ul>
-                </div>
-            }
+                            }
+                        </ul>
+                    </div>
+                }
+            </form>
         </div>
     </div>
 </div>
-@*<script src="~/Scripts/Resources.js"></script>*@
+<script src="~/Scripts/Resources.js"></script>
 
 

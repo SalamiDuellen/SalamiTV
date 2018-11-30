@@ -1,5 +1,24 @@
-﻿<script type="text/javascript">
-    $(document).ready(function(){
-        $('a[data-toggle=tooltip]').tooltip();
+﻿$(".visibleitem").click(function () {
+
+    $header = $(this);
+    //getting the next element
+    $content = $header.next();
+    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    $content.slideToggle(500, function () {
+        //execute this after slideToggle is done
+        //change text of header based on visibility of content div
+        $header.text(function () {
+            //change text based on condition
+            //return $content.is(":visible") ? "Collapse" : "Expand";
+        });
     });
-  </script>
+
+});
+//});
+//(function myFunction(item) {
+//    var x = document.getElementById("#hiddenitem");
+//    for (var i in item) {
+//        alert(i);
+
+//    }
+//});

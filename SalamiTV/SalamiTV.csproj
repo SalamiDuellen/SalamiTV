@@ -237,6 +237,8 @@
     </Content>
     <Content Include="Images\aktuellt.jpg" />
     <Content Include="Images\avengers_thanos.jpg" />
+    <Content Include="Images\me.jpg" />
+    <Content Include="Images\profilepicture.jpg" />
     <Content Include="Images\samycketbattre.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
