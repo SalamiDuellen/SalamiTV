@@ -19,7 +19,7 @@ namespace SalamiTV.ViewModels
         void ReturnDateStrings()
         {
             Dates = new List<string>();
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 7; i++)
             {
                 var dates = DateTime.Today.Date.AddDays(i).ToShortDateString();
                 Dates.Add(dates);

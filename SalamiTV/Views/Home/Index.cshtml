@@ -1,16 +1,9 @@
-﻿@*@model IEnumerable<SalamiTV.Models.TvChannel>*@
-@model SalamiTV.ViewModels.HomePageVM
+﻿@model SalamiTV.ViewModels.HomePageVM
 
 @{
-    ViewBag.Title = "Programtablå";
+    ViewBag.title = "programtablå";
 }
-
-@*@{
-        // Kan returnera en lista baserad på users id
-        Html.RenderAction("PartialTvChannel", "Home", new { id = Model});
-    }*@
-
-
+@*page navigation*@
 <div class="container">
     <div class="row">
         <nav aria-label="Page navigation">
@@ -21,7 +14,6 @@
                     </a>
                 </li>
                 @*ska få in värdet på datetime.now här för pagingen*@
-                @*<li><a href="#">Idag</a></li>*@
                 @for (int i = 0; i < Model.Dates.Count; i++)
                 {
                     <li>@Html.ActionLink(Model.Dates[i], "Index", new { page = i })</li>
@@ -37,7 +29,7 @@
         </nav>
     </div>
 </div>
-
+ 
 @* Carousel *@
 <div class="container">
     <div class="row">
@@ -82,11 +74,9 @@
 </div>
 
 
-
 <div class="container-fluid">
     <div id="tvchannel">
         <div class="row">
-            <form>
                 @foreach (var item in Model.TvChannels)
                 {
                     <div class="col-xs-12 col-sm-6 col-md-3">
@@ -96,31 +86,30 @@
                         <ul class="list-group">
                             @foreach (var thing in item.TvPrograms)
                             {
-                            <li class="list-group-item">
-                                <span class="visibleitem">
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(8)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => thing.Title)
-                                    <br />
+                                <li class="list-group-item">
+                                    <span class="visibleitem">
+                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
+                                        <br />
+                                        @Html.DisplayFor(modelItem => thing.Title)
+                                        <br />
 
-                                </span>
-                                <span class="hiddenitem">
-                                    @Html.DisplayFor(modelItem => thing.Details)<br />
+                                    </span>
+                                    <span class="hiddenitem">
+                                        @Html.DisplayFor(modelItem => thing.Details)<br />
 
-                                    @foreach (var cat in thing.TvProgramCategories)
-                                    {
-                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                    }
+                                        @foreach (var cat in thing.TvProgramCategories)
+                                        {
+                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                        }
 
-                                    @*@Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)*@
-                                    @*<br />*@
-                                </span>
-                            </li>
+                                        <br />
+                                        @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
+                                    </span>
+                                </li>
                             }
                         </ul>
                     </div>
                 }
-            </form>
         </div>
     </div>
 </div>

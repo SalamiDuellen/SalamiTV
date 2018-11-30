@@ -19,7 +19,7 @@
 
                     <div id="channelheader">
                         <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
-                        @Html.ActionLink("Ta bort från min lista", "Delete", "UserTablau", new { id = item.TvChannelID }, null)
+                        @Html.ActionLink("Ta bort från min lista", "Delete", "UserTablau", new { id = item.ID }, null)
                     </div>
 
                     <ul class="list-group">

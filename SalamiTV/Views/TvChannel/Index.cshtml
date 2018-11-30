@@ -1,52 +1,99 @@
 ﻿@model IEnumerable<SalamiTV.Models.TvChannel>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<div class="container text-center">
+                <h2>
+                    Kanalsida
+                </h2>
+
+
+
+<div class="container-fluid">
     <div id="tvchannel">
         <div class="row">
-
             @foreach (var item in Model)
             {
+                ViewBag.Title = item.Name;
+
                 <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div style="font-size:18px">
-                        <ul>
-                            @Html.DisplayFor(modelItem => item.Name)
-
-                            @foreach (var thing in item.TvPrograms)
-
-                            {
-
-                                <li>
+                    <div id="channelheader">
+                        <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
+                    </div>
+                    <ul class="list-group">
+                        @foreach (var thing in item.TvPrograms)
+                        {
+                            <li class="list-group-item">
+                                <span class="visibleitem">
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(8)
+                                    <br />
                                     @Html.DisplayFor(modelItem => thing.Title)
-                                </li>
+                                    <br />
 
-                                <li>
-                                    @Html.DisplayFor(modelItem => thing.Details)
-                                </li>
-                                <li>
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
-                                </li>
-                                <li>
+                                </span>
+                                <span class="hiddenitem">
+                                    @Html.DisplayFor(modelItem => thing.Details)<br />
+
                                     @foreach (var cat in thing.TvProgramCategories)
                                     {
                                         @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
                                     }
 
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                                    <br />
+                                </span>
+                            </li>
+                        }
+                    </ul>
                 </div>
             }
         </div>
     </div>
 </div>
+
+
+
+@*<div class="container text-center">
+        <div id="tvchannel">
+            <div class="row">
+
+                @foreach (var item in Model)
+                {
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div style="font-size:18px">
+                            <ul>
+                                @Html.DisplayFor(modelItem => item.Name)
+
+                                @foreach (var thing in item.TvPrograms)
+
+                                {
+
+                                    <li>
+                                        @Html.DisplayFor(modelItem => thing.Title)
+                                    </li>
+
+                                    <li>
+                                        @Html.DisplayFor(modelItem => thing.Details)
+                                    </li>
+                                    <li>
+                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
+                                    </li>
+                                    <li>
+                                        @foreach (var cat in thing.TvProgramCategories)
+                                        {
+                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                        }
+
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
 
 @foreach (var item in Model)
 {
@@ -61,5 +108,5 @@
         </td>
     </tr>
 }
+<script src="~/Scripts/Resources.js"></script>
 
-            </table>

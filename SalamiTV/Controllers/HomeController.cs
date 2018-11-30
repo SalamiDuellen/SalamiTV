@@ -20,14 +20,21 @@ namespace SalamiTV.Controllers
 
         public ActionResult Index(int? page)
         {
-
             HomePageVM hpVM = new HomePageVM();
+            var userId = HttpContext.User.Identity.GetUserId();
+
 
             //Sätter pagenumber till 0 om värdet är null
             int pageNumber = (page ?? 0);
 
-            var searchDate = DateTime.Now.AddDays(pageNumber).Date;
-            var tomorrow = searchDate.AddDays(1);
+            var searchDate = DateTime.Now.AddDays(pageNumber);
+
+            if (pageNumber != 0)
+            {
+                // todo: behöver få till så att man söker på tid + längd på programmet.
+                searchDate = DateTime.Now.AddDays(pageNumber).Date;
+            }
+            var tomorrow = searchDate.AddDays(1).Date;
 
             // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
             salamiContext.Configuration.LazyLoadingEnabled = false;
