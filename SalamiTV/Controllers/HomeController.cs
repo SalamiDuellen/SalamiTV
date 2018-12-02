@@ -35,8 +35,7 @@ namespace SalamiTV.Controllers
 
             // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
             salamiContext.Configuration.LazyLoadingEnabled = false;
-            //hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList();
-            hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList()/*.Where(x => x.ID == id)*/;
+            hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList();
 
 
             return View(hpVM);

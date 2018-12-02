@@ -23,22 +23,15 @@ namespace SalamiTV.Controllers
         }
 
         // GET: TvChannel
-        public async Task<ActionResult> Index(int? id)
+        public ActionResult Index(int? id)
         {
-            List<TvChannel> list = new List<TvChannel>();
             var searchDate = DateTime.Now;
-
             var tomorrow = searchDate.AddDays(1);
-            var yestarday = searchDate.AddDays(-1);
 
-            if (id != null)
-            {
-                salamiContext.Configuration.LazyLoadingEnabled = false;
-                var channel = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow && p.Broadcasting > yestarday) }).ToList().Select(x => x.c).ToList()/*.Where(x => x.ID == id)*/;
+            //salamiContext.Configuration.LazyLoadingEnabled = false;
+            var channel = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Where(x => x.c.ID == id).Select(x => x.c).ToList();
 
-                return View(channel);
-            }
-            return View(await salamiContext.TvChannels.ToListAsync());
+            return View(channel);
         }
 
         // GET: TvChannel/Details/5
