@@ -93,19 +93,14 @@ textarea {
     background-color: #eaf3f7;
     min-height: 50px;
 }
-.list-group .list-group-item span {
-    position:relative;
-}
 /*Vet inte om denna behövs...*/
 .hiddenitem {
     display: none;
 }
-
 #aboutusimage img {
     max-height: 100px;
     min-width: 100px;
 }
-
 .row {
     display: -webkit-box;
     display: -webkit-flex;

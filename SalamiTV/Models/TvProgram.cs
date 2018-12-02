@@ -25,7 +25,7 @@ namespace SalamiTV.Models
         [StringLength(255)]
         public string Details { get; set; }
         public DateTime Broadcasting { get; set; }
-
+        public DateTime EndTime { get; set; }
         public int Duration { get; set; }
 
         public int TvChannelID { get; set; }

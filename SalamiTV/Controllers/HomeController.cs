@@ -26,19 +26,18 @@ namespace SalamiTV.Controllers
 
             //Sätter pagenumber till 0 om värdet är null
             int pageNumber = (page ?? 0);
-
             var searchDate = DateTime.Now.AddDays(pageNumber);
-
             if (pageNumber != 0)
             {
-                // todo: behöver få till så att man söker på tid + längd på programmet.
                 searchDate = DateTime.Now.AddDays(pageNumber).Date;
             }
             var tomorrow = searchDate.AddDays(1).Date;
 
             // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
             salamiContext.Configuration.LazyLoadingEnabled = false;
-            hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList();
+            //hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList();
+            hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Select(x => x.c).ToList()/*.Where(x => x.ID == id)*/;
+
 
             return View(hpVM);
         }

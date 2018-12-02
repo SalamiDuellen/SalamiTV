@@ -27,7 +27,7 @@
                         {
                             <li class="list-group-item">
                                 <span class="visibleitem">
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(8)
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
                                     <br />
                                     @Html.DisplayFor(modelItem => thing.Title)
                                     <br />
@@ -43,6 +43,8 @@
 
                                     <br />
                                 </span>
+                                @Html.DisplayFor(modelItem=> thing.Broadcasting).ToString()
+
                             </li>
                         }
                     </ul>

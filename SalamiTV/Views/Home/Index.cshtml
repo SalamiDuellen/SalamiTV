@@ -86,24 +86,26 @@
                     <ul class="list-group">
                         @foreach (var thing in item.TvPrograms)
                         {
-                            <li class="list-group-item">
-                                <span class="visibleitem" style="height:100px; width:100px;">
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
-                                    <br/>
-                                    @Html.DisplayFor(modelItem => thing.Title)
-                                    <br />
+                        <li class="list-group-item">
+                            <span class="visibleitem" style="height:100px; width:100px;">
+                                @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
 
-                                </span>
-                                <span class="hiddenitem">
-                                    @Html.DisplayFor(modelItem => thing.Details)<br />
-                                    @foreach (var cat in thing.TvProgramCategories)
-                                    {
-                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                    }
-                                    <br />
-                                    @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
-                                </span>
-                            </li>
+                                @Html.DisplayFor(modelItem => thing.Title)
+                                <br />
+
+                            </span>
+                            <span class="hiddenitem">
+                                @Html.DisplayFor(modelItem => thing.Details)<br />
+                                @foreach (var cat in thing.TvProgramCategories)
+                                {
+                                    @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                }
+                                <br />
+                                @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
+                            </span>
+                            @Html.DisplayFor(modelItem => thing.Broadcasting).ToString()
+
+                        </li>
                         }
                     </ul>
                 </div>
