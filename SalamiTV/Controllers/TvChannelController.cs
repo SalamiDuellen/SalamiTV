@@ -26,11 +26,16 @@ namespace SalamiTV.Controllers
         public ActionResult Index(int? id)
         {
             var searchDate = DateTime.Now;
-            var tomorrow = searchDate.AddDays(1);
+            var tomorrow = searchDate.AddDays(1).Date;
 
-            //salamiContext.Configuration.LazyLoadingEnabled = false;
-            var channel = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow) }).ToList().Where(x => x.c.ID == id).Select(x => x.c).ToList();
+            salamiContext.Configuration.LazyLoadingEnabled = false;
 
+            var channel = salamiContext.TvChannels.Where(x => x.ID == id).Select(c => new
+            {
+                c,
+                programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow)
+                .OrderBy(p => p.Broadcasting)
+            }).ToList().Select(x => x.c).ToList();
             return View(channel);
         }
 
