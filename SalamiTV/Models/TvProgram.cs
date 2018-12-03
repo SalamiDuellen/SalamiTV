@@ -29,7 +29,7 @@ namespace SalamiTV.Models
         public int Duration { get; set; }
 
         public int TvChannelID { get; set; }
-
+        public bool IsInFocus { get; set; }
         public virtual TvChannel TvChannel { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

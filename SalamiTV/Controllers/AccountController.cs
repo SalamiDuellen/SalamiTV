@@ -71,11 +71,7 @@ namespace SalamiTV.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            List<SelectListItem> list = new List<SelectListItem>();
-            foreach (var role in RoleManager.Roles)
-
-                list.Add(new SelectListItem() { Value = role.Name, Text = role.Name });
-            ViewBag.Roles = list;
+ 
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }

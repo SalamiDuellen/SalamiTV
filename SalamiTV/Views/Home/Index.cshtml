@@ -1,6 +1,8 @@
 ﻿@model SalamiTV.ViewModels.HomePageVM
 
 @{
+    /**/
+
     ViewBag.title = "programtablå";
 }
 @*page navigation*@
@@ -86,26 +88,55 @@
                     <ul class="list-group">
                         @foreach (var thing in item.TvPrograms)
                         {
-                        <li class="list-group-item">
-                            <span class="visibleitem" style="height:100px; width:100px;">
-                                @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString()
+                            if (thing.EndTime > DateTime.Now && thing.Broadcasting < DateTime.Now)
+                            {
+                                <li class="list-group-item">
+                                    <span class="visibleitem">
+                                        Pågående!
+                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
+                                        <br />
+                                        @Html.DisplayFor(modelItem => thing.Title)
+                                        <br />
 
-                                @Html.DisplayFor(modelItem => thing.Title)
-                                <br />
+                                    </span>
+                                    <span class="hiddenitem">
+                                        @Html.DisplayFor(modelItem => thing.Details)<br />
 
-                            </span>
-                            <span class="hiddenitem">
-                                @Html.DisplayFor(modelItem => thing.Details)<br />
-                                @foreach (var cat in thing.TvProgramCategories)
-                                {
-                                    @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                }
-                                <br />
-                                @Html.ActionLink("TvChannel", "Index", "TvChannel", new { id = item.ID }, null)
-                            </span>
-                            @Html.DisplayFor(modelItem => thing.Broadcasting).ToString()
+                                        @foreach (var cat in thing.TvProgramCategories)
+                                        {
+                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                        }
+                                        <br />
+                                        [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
+                                        <br />
+                                    </span>
+                                </li>
+                            }
+                            else
+                            {
 
-                        </li>
+                                <li class="list-group-item">
+
+                                    <span class="visibleitem">
+                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
+                                        <br />
+                                        @Html.DisplayFor(modelItem => thing.Title)
+                                        <br />
+
+                                    </span>
+                                    <span class="hiddenitem">
+                                        @Html.DisplayFor(modelItem => thing.Details)<br />
+
+                                        @foreach (var cat in thing.TvProgramCategories)
+                                        {
+                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                        }
+                                        <br />
+                                        [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
+                                        <br />
+                                    </span>
+                                </li>
+                            }
                         }
                     </ul>
                 </div>

@@ -69,77 +69,87 @@
                 </form>
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li>
-                        @*kommer direkt till loginsindan*@
-                        @if (!Context.User.Identity.IsAuthenticated)
-                        {
+                    @*kommer direkt till loginsindan*@
+                    @if (!Context.User.Identity.IsAuthenticated)
+                    {
+                        <li>
                             <a href="~/Account/Login">
                                 Logga in
                                 <span class="glyphicon glyphicon-log-in"></span>
                             </a>
-                        }
-                        else
-                        {
+                        </li>
+                    }
+                    @*lägga till isinrole för admin och länka till adminsida*@
+                    else if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Admin"))
+                    {
                         <li>  @Html.ActionLink("Logga ut", "LogOff", "Account")</li>
-                        <li><a href="~/Account/LogOff"><span class="glyphicon glyphicon-home"></span></a></li>
+                        <li>  @Html.ActionLink("Adminsida", "Index", "Admin")</li>
+                        <li><a href="~/UserTablau/Index"><span class="glyphicon glyphicon-home"></span></a></li>
+
+                        @*<li><a href="~/Account/LogOff"><span class="glyphicon glyphicon-home"></span></a></li>*@
+                    }
+                    else
+                    {
+                        <li>  @Html.ActionLink("Logga ut", "LogOff", "Account")</li>
+                        <li><a href="~/UserTablau/Index"><span class="glyphicon glyphicon-home"></span></a></li>
 
                     }
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @*<div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-inverse">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#"><i class="fas fa-home fa-lg"></i></a></li>
+                        <li><a href="/Home/About">Om oss</a></li>
+                        <li><a href="/Home/Contact">Kontakta oss</a></li>
+                        <li>
+                            <div class="ui-widget">
+                                 <label for="tags">Tags: </label>
+                                         <input id="tags">
+                                <form autocomplete="off" id="topnavsearch">
+                                    <input id="inputautocomplete" type="text"
+                                           name="search" placeholder="Sök...">
+                                    <button id="formButton" onclick="getProgramInfo();" type="button">Sök</button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="mypage.html">Min sida <i class="fas fa-sign-in-alt fa-lg"></i></a></li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-
-        @*<div class="container-fluid">
-            <div class="row">
-                <nav class="navbar navbar-inverse">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-                    <div class="collapse navbar-collapse" id="myNavbar">
-                        <ul class="nav navbar-nav">
-                            <li class="active"><a href="#"><i class="fas fa-home fa-lg"></i></a></li>
-                            <li><a href="/Home/About">Om oss</a></li>
-                            <li><a href="/Home/Contact">Kontakta oss</a></li>
-                            <li>
-                                <div class="ui-widget">
-                                     <label for="tags">Tags: </label>
-                                             <input id="tags">
-                                    <form autocomplete="off" id="topnavsearch">
-                                        <input id="inputautocomplete" type="text"
-                                               name="search" placeholder="Sök...">
-                                        <button id="formButton" onclick="getProgramInfo();" type="button">Sök</button>
-                                    </form>
-                                </div>
-                            </li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                            <li><a href="mypage.html">Min sida <i class="fas fa-sign-in-alt fa-lg"></i></a></li>
-                        </ul>
-                    </div>
-                </nav>*@
+            </nav>*@
 
 
-        @*<div class="col-xs-12">
-                <p id="programinfo">
-                    <ul id="prog-info-ul"></ul>
-                </p>
-            </div>*@
+    @*<div class="col-xs-12">
+            <p id="programinfo">
+                <ul id="prog-info-ul"></ul>
+            </p>
+        </div>*@
 
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-        </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
 
-        <footer class="container-fluid text-center">
-            <a href="/Home/About"> Om oss </a><br />
-            <a href="/Home/Contact"> Kontakta oss </a>
-        </footer>
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
-    </body>
+    <footer class="container-fluid text-center">
+        <a href="/Home/About"> Om oss </a><br />
+        <a href="/Home/Contact"> Kontakta oss </a>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
 </html>

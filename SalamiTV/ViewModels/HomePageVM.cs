@@ -9,6 +9,8 @@ namespace SalamiTV.ViewModels
     public class HomePageVM
     {
         public List<TvChannel> TvChannels { get; set; }
+        public List<TvProgram> HighlightedProgram { get; set; }
+
         public List<string> Dates { get; set; }
 
         public HomePageVM()
