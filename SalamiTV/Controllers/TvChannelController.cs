@@ -13,12 +13,12 @@ namespace SalamiTV.Controllers
 {
     public class TvChannelController : Controller
     {
-        private SalamiTVDB salamiContext = new SalamiTVDB();
+        private SalamiTVDB dbContext = new SalamiTVDB();
 
         //[ChildActionOnly]
         public async Task<ActionResult> PartialTvChannel(int id)
         {
-            var channel = await salamiContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
+            var channel = await dbContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
             return PartialView(channel);
         }
 
@@ -28,9 +28,9 @@ namespace SalamiTV.Controllers
             var searchDate = DateTime.Now;
             var tomorrow = searchDate.AddDays(1).Date;
 
-            salamiContext.Configuration.LazyLoadingEnabled = false;
+            dbContext.Configuration.LazyLoadingEnabled = false;
 
-            var channel = salamiContext.TvChannels.Where(x => x.ID == id).Select(c => new
+            var channel = dbContext.TvChannels.Where(x => x.ID == id).Select(c => new
             {
                 c,
                 programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow)
@@ -46,7 +46,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
+            TvChannel tvChannel = await dbContext.TvChannels.FindAsync(id);
             if (tvChannel == null)
             {
                 return HttpNotFound();
@@ -69,8 +69,8 @@ namespace SalamiTV.Controllers
         {
             if (ModelState.IsValid)
             {
-                salamiContext.TvChannels.Add(tvChannel);
-                await salamiContext.SaveChangesAsync();
+                dbContext.TvChannels.Add(tvChannel);
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -84,7 +84,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
+            TvChannel tvChannel = await dbContext.TvChannels.FindAsync(id);
             if (tvChannel == null)
             {
                 return HttpNotFound();
@@ -101,8 +101,8 @@ namespace SalamiTV.Controllers
         {
             if (ModelState.IsValid)
             {
-                salamiContext.Entry(tvChannel).State = EntityState.Modified;
-                await salamiContext.SaveChangesAsync();
+                dbContext.Entry(tvChannel).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(tvChannel);
@@ -115,7 +115,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
+            TvChannel tvChannel = await dbContext.TvChannels.FindAsync(id);
             if (tvChannel == null)
             {
                 return HttpNotFound();
@@ -128,9 +128,9 @@ namespace SalamiTV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            TvChannel tvChannel = await salamiContext.TvChannels.FindAsync(id);
-            salamiContext.TvChannels.Remove(tvChannel);
-            await salamiContext.SaveChangesAsync();
+            TvChannel tvChannel = await dbContext.TvChannels.FindAsync(id);
+            dbContext.TvChannels.Remove(tvChannel);
+            await dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -138,7 +138,7 @@ namespace SalamiTV.Controllers
         {
             if (disposing)
             {
-                salamiContext.Dispose();
+                dbContext.Dispose();
             }
             base.Dispose(disposing);
         }

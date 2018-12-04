@@ -16,7 +16,7 @@ namespace SalamiTV.Controllers
 
     public class HomeController : Controller
     {
-        SalamiTVDB salamiContext = new SalamiTVDB();
+        SalamiTVDB dbContext = new SalamiTVDB();
 
         public ActionResult Index(int? page)
         {
@@ -38,8 +38,8 @@ namespace SalamiTV.Controllers
             hpVM.HighlightedProgram =  newContext.TvChannels.SelectMany(x => x.TvPrograms).Where(x => x.IsInFocus == true).ToList();
 
             // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
-            salamiContext.Configuration.LazyLoadingEnabled = false;
-            hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting <= tomorrow).GroupBy(p => p.Broadcasting) /*ASC == default*/ }).ToList().Select(x => x.c).ToList();
+            dbContext.Configuration.LazyLoadingEnabled = false;
+            hpVM.TvChannels = dbContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting <= tomorrow).GroupBy(p => p.Broadcasting) /*ASC == default*/ }).ToList().Select(x => x.c).ToList();
 
 
             return View(hpVM);
@@ -51,7 +51,7 @@ namespace SalamiTV.Controllers
             var userId = HttpContext.User.Identity.GetUserId();
             //var userTablaus = await salamiContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
 
-            var channel = await salamiContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
+            var channel = await dbContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
             return PartialView(channel);
         }
 

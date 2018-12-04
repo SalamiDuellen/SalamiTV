@@ -14,7 +14,7 @@ namespace SalamiTV.Controllers
 {
     public class UserTablauController : Controller
     {
-        private SalamiTVDB db = new SalamiTVDB();
+        private SalamiTVDB dbContext = new SalamiTVDB();
 
         // GET: UserTablau
         //asynk för att den ena querien ska vänta in den andra. Vet dock inte om det behövs här
@@ -22,14 +22,14 @@ namespace SalamiTV.Controllers
         {
             var userId = HttpContext.User.Identity.GetUserId();
 
-            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+            var userTablaus = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
 
             return View(await userTablaus.ToListAsync());
         }
 
         public ActionResult AddChannelToTablau()
         {
-            var channels = db.TvChannels.Select(x => x);
+            var channels = dbContext.TvChannels.Select(x => x);
 
             var userId = HttpContext.User.Identity.GetUserId();// behöver denna vara här? 
 
@@ -54,12 +54,12 @@ namespace SalamiTV.Controllers
 
             if (userTablau.AspNetUsersId != null && userTablau.TvChannelID != null)
             {
-                db.UserTablaus.Add(userTablau);
-                await db.SaveChangesAsync();
+                dbContext.UserTablaus.Add(userTablau);
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            var userTablaus = db.UserTablaus.Where(x => x.AspNetUsersId == userID).Include(u => u.TvChannel);
+            var userTablaus = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userID).Include(u => u.TvChannel);
 
 
             return View(await userTablaus.ToListAsync());
@@ -74,7 +74,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            userTablau = await db.UserTablaus.FindAsync(userTablau.ID);
+            userTablau = await dbContext.UserTablaus.FindAsync(userTablau.ID);
             if (userTablau == null)
             {
                 return HttpNotFound();
@@ -85,8 +85,8 @@ namespace SalamiTV.Controllers
         // GET: UserTablau/Create
         public ActionResult Create()
         {
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name");
-            ViewBag.AspNetUsersId = new SelectList(db.UserInfoes, "ID", "UserName");
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name");
+            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName");
             return View();
         }
 
@@ -99,13 +99,13 @@ namespace SalamiTV.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.UserTablaus.Add(userTablau);
-                await db.SaveChangesAsync();
+                dbContext.UserTablaus.Add(userTablau);
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.AspNetUsersId = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
             return View(userTablau);
         }
 
@@ -116,13 +116,13 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+            UserTablau userTablau = await dbContext.UserTablaus.FindAsync(id);
             if (userTablau == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.AspNetUsersId = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
             return View(userTablau);
         }
 
@@ -135,12 +135,12 @@ namespace SalamiTV.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(userTablau).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                dbContext.Entry(userTablau).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.AspNetUsersId = new SelectList(db.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", userTablau.TvChannelID);
+            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
             return View(userTablau);
         }
 
@@ -152,7 +152,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
+            UserTablau userTablau = await dbContext.UserTablaus.FindAsync(id);
             if (userTablau == null)
             {
                 return HttpNotFound();
@@ -166,9 +166,9 @@ namespace SalamiTV.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             // Genomför själva raderingen.. Sparar och ätervänder till förstasidan på min sida
-            UserTablau userTablau = await db.UserTablaus.FindAsync(id);
-            db.UserTablaus.Remove(userTablau);
-            await db.SaveChangesAsync();
+            UserTablau userTablau = await dbContext.UserTablaus.FindAsync(id);
+            dbContext.UserTablaus.Remove(userTablau);
+            await dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -177,7 +177,7 @@ namespace SalamiTV.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                dbContext.Dispose();
             }
             base.Dispose(disposing);
         }
