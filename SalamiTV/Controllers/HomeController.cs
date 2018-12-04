@@ -33,8 +33,10 @@ namespace SalamiTV.Controllers
             }
             var tomorrow = searchDate.AddDays(1).Date;
 
+            var newContext = new SalamiTVDB();
             //Hämtar higlightade program (aka puffar)
-            hpVM.HighlightedProgram = salamiContext.TvPrograms.Select(x => x).Where(x => x.IsInFocus == true).ToList();
+            hpVM.HighlightedProgram =  newContext.TvChannels.SelectMany(x => x.TvPrograms).Where(x => x.IsInFocus == true).ToList();
+
             // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
             salamiContext.Configuration.LazyLoadingEnabled = false;
             hpVM.TvChannels = salamiContext.TvChannels.Select(c => new { c, programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting <= tomorrow).GroupBy(p => p.Broadcasting) /*ASC == default*/ }).ToList().Select(x => x.c).ToList();

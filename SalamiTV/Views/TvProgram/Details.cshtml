@@ -1,25 +1,24 @@
 ﻿@model SalamiTV.Models.TvProgram
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Programinfo";
 }
 
-<h2>Details</h2>
 
 <div>
-    <h4>TvProgram</h4>
+    <h4>@Html.DisplayFor(model=> model.TvChannel.Name)</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TvChannel.Name)
+        @*<dt>
+            Kanal
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.TvChannel.Name)
-        </dd>
+        </dd>*@
 
         <dt>
-            @Html.DisplayNameFor(model => model.Title)
+            Program
         </dt>
 
         <dd>
@@ -27,7 +26,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Details)
+            Beskrivning
         </dt>
 
         <dd>
@@ -35,15 +34,23 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Broadcasting)
+            Sändningstid
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Broadcasting)
+            @Html.DisplayFor(model => model.Broadcasting).ToString().Remove(0, 10).Remove(6)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Duration)
+            Datum
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Broadcasting).ToString().Remove(11)
+        </dd>
+
+        <dt>
+            Längd
         </dt>
 
         <dd>
@@ -52,7 +59,15 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+@if (Context.User.IsInRole("Admin"))
+{
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) | @Html.ActionLink("Back to List", "Index")
+
+    </p>
+}
+else
+{
+
     @Html.ActionLink("Back to List", "Index")
-</p>
+}
