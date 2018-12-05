@@ -13,12 +13,12 @@ namespace SalamiTV.Controllers
 {
     public class TvProgramController : Controller
     {
-        private SalamiTVDB db = new SalamiTVDB();
+        private SalamiTVDB dbContext = new SalamiTVDB();
 
         // GET: TvProgram
         public async Task<ActionResult> Index()
         {
-            var tvPrograms = db.TvPrograms.Include(t => t.TvChannel);
+            var tvPrograms = dbContext.TvPrograms.Include(t => t.TvChannel);
             return View(await tvPrograms.ToListAsync());
         }
 
@@ -29,7 +29,7 @@ namespace SalamiTV.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            TvProgram tvProgram = await dbContext.TvPrograms.FindAsync(id);
             if (tvProgram == null)
             {
                 return HttpNotFound();
@@ -40,69 +40,74 @@ namespace SalamiTV.Controllers
         // GET: TvProgram/Create
         public ActionResult Create()
         {
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name");
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name");
             return View();
         }
 
         // POST: TvProgram/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
-                db.TvPrograms.Add(tvProgram);
-                await db.SaveChangesAsync();
+                dbContext.TvPrograms.Add(tvProgram);
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", tvProgram.TvChannelID);
             return View(tvProgram);
         }
 
         // GET: TvProgram/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            TvProgram tvProgram = await dbContext.TvPrograms.FindAsync(id);
             if (tvProgram == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", tvProgram.TvChannelID);
             return View(tvProgram);
         }
 
         // POST: TvProgram/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
+        public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Details,Broadcasting,EndTime,TvChannelID ,Duration, IsInFocus")] TvProgram tvProgram)
+        //public async Task<ActionResult> Edit([Bind(Include = "ID,Title,Details, IsInFocus")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(tvProgram).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                dbContext.Entry(tvProgram).State = EntityState.Modified;
+                await dbContext.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            ViewBag.TvChannelID = new SelectList(db.TvChannels, "ID", "Name", tvProgram.TvChannelID);
+            ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", tvProgram.TvChannelID);
             return View(tvProgram);
         }
 
         // GET: TvProgram/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
+            TvProgram tvProgram = await dbContext.TvPrograms.FindAsync(id);
             if (tvProgram == null)
             {
                 return HttpNotFound();
@@ -115,9 +120,9 @@ namespace SalamiTV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
-            TvProgram tvProgram = await db.TvPrograms.FindAsync(id);
-            db.TvPrograms.Remove(tvProgram);
-            await db.SaveChangesAsync();
+            TvProgram tvProgram = await dbContext.TvPrograms.FindAsync(id);
+            dbContext.TvPrograms.Remove(tvProgram);
+            await dbContext.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -125,7 +130,7 @@ namespace SalamiTV.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                dbContext.Dispose();
             }
             base.Dispose(disposing);
         }

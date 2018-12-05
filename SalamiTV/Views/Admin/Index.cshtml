@@ -1,17 +1,9 @@
 ﻿@model IEnumerable<SalamiTV.Models.TvProgram>
 
-@{
-    ViewBag.Title = "Index";
-}
 
-<h2>Index</h2>
-
-@if (Context.User.IsInRole("Admin"))
-{
-    <p>
-        @Html.ActionLink("Create New", "Create")
-    </p>
-}
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
 <table class="table">
     <tr>
         <th>
@@ -27,7 +19,13 @@
             @Html.DisplayNameFor(model => model.Broadcasting)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.EndTime)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsInFocus)
         </th>
         <th></th>
     </tr>
@@ -42,23 +40,29 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Details)
+                @Html.TextAreaFor(modelItem => item.Details)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Broadcasting)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.EndTime)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
-            @if (Context.User.IsInRole("Admin"))
-            {
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            }
+            <td>
+                @*@Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)*@
+                @Html.DisplayFor(modelItem => item.IsInFocus)
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) |
+                @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) |
+                @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null)
+            </td>
         </tr>
     }
 
 </table>
+<input type="submit" value="Spara" />

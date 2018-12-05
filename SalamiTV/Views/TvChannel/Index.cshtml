@@ -1,65 +1,76 @@
 ﻿@model IEnumerable<SalamiTV.Models.TvChannel>
 
 @{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
 
-<div class="container text-center">
+<h2>
+    Kanalsida
+</h2>
+
+
+<div class="container-fluid">
     <div id="tvchannel">
         <div class="row">
 
             @foreach (var item in Model)
             {
+
                 <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div style="font-size:18px">
-                        <ul>
+                    <div id="channelheader">
+                        <h4>
                             @Html.DisplayFor(modelItem => item.Name)
+                        </h4>
 
-                            @foreach (var thing in item.TvPrograms)
+                    </div>
+                    <ul class="list-group">
+                        @foreach (var thing in item.TvPrograms)
+                        {
+                            <li class="list-group-item">
 
-                            {
-
-                                <li>
+                                <span class="visibleitem">
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
+                                    <br />
                                     @Html.DisplayFor(modelItem => thing.Title)
-                                </li>
+                                    <br />
 
-                                <li>
-                                    @Html.DisplayFor(modelItem => thing.Details)
-                                </li>
-                                <li>
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay)
-                                </li>
-                                <li>
+                                </span>
+                                <span class="hiddenitem">
+                                    @Html.DisplayFor(modelItem => thing.Details)<br />
+
                                     @foreach (var cat in thing.TvProgramCategories)
                                     {
                                         @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
                                     }
+                                    <br />
+                                    [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
+                                    <br />
+                                </span>
 
-                                </li>
-                            }
-                        </ul>
-                    </div>
+                            </li>
+                        }
+                    </ul>
                 </div>
             }
         </div>
     </div>
 </div>
-
-@foreach (var item in Model)
+@if (Context.User.IsInRole("Admin"))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 }
+<script src="~/Scripts/Resources.js"></script>
 
-            </table>

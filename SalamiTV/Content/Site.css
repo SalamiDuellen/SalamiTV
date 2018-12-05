@@ -33,14 +33,14 @@ textarea {
         background: #BDD4DE;
     }
 }
-
-#myCarousel {
+/* Tabort*/
+/*#myCarousel {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     margin-top: 5%;
     margin-bottom: 5%;
-}
+}*/
 
 #channelheader {
     /*background-color: #eaf3f7;*/
@@ -84,13 +84,23 @@ textarea {
 }
 
 .list-group-item {
-    border: none;
+    border: solid;
+    border-color: lightgray;
+    border-width: 1px;
     padding: 1% 4% 1% 4%;
     margin: 0%;
     font-size: 12px;
     background-color: #eaf3f7;
+    min-height: 50px;
 }
-
+/*Vet inte om denna behövs...*/
+.hiddenitem {
+    display: none;
+}
+#aboutusimage img {
+    max-height: 100px;
+    min-width: 100px;
+}
 .row {
     display: -webkit-box;
     display: -webkit-flex;
@@ -103,14 +113,6 @@ textarea {
         display: flex;
         flex-direction: column;
     }
-
-/*.list-group-item {
-        border: none;
-        padding: 2%;
-        text-align: left;
-    }*/
-
-
 .navbar navbar-light {
     padding-bottom: 1px;
     font-size: 8px;
@@ -120,7 +122,10 @@ textarea {
     width: 20%;
     margin: auto;
 }
-
+/*page navigation*/
+#pagenav {
+    margin:auto;
+}
 /*#region SiteNavigation */
 .navbar-default {
     background-color: #BDD4DE;
@@ -153,48 +158,16 @@ textarea {
     }
 /*#endregion */
 
-/*#region Old SiteNavigation REMOVE? */
-
-/*.navbar-default .navbar-nav > li > a {
-        color: #000;
-        background: #BDD4DE;
-    }*/
-
-
-/*.navbar {
-    background: #BDD4DE;
-    color: #000;
-    margin-bottom: 0;
-    border-radius: 0;
-}*/
-/*/*texten på listitem ändrats till svart*/
-/*.navbar-inverse .navbar-nav > li > a {
-    color: #000;
-    background: #BDD4DE;
+#infocusprogram {
+    
+    overflow:hidden;
+    float:left;
+    width: 100%; /* Set width to 100% */
+    margin: 10%,30%;
+    min-height: 100px;
+    max-height: 150px;
+    max-width: 200px;
 }
-
-.navbar-inverse .navbar-nav > .active > a, .navbar-inverse .navbar-nav > .active > a:focus, .navbar-inverse .navbar-nav > .active,
-.navbar-inverse .navbar-nav > .active > a:hover {
-    background-color: #BDD4DE;
-    color: #fff;
-}*/
-/*.navbar-inverse .navbar-nav > li:hover {
-    color: #000;
-    background-color: #3F5765;
-}*/
-/*li form {
-    padding-top: 15px;
-    padding-bottom: 0px;
-}*/
-
-/*/*Gör så att sökformuläret inte markeras när man hovrar över*/
-/*#topnavsearch:hover {
-    background-color: #BDD4DE;
-    float: right;
-}*/
-
-/*#endregion */
-
 #imgDiv {
     width: 100%;
     max-width: 200px;

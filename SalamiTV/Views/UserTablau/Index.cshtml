@@ -1,10 +1,13 @@
 ﻿@model IEnumerable<SalamiTV.Models.UserTablau>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Min sida";
 }
+<h3>
+    Välkommen
+    @ViewBag.UserName @HttpContext.Current.User.Identity.Name
 
-<h2>Index</h2>
+</h3>
 
 
 <div class="container-fluid">
@@ -16,7 +19,7 @@
 
                     <div id="channelheader">
                         <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
-                        <h4>@Html.DisplayFor(modelItem => item.ID)</h4>
+                        @Html.ActionLink("Ta bort från min lista", "Delete", "UserTablau", new { id = item.ID }, null)
                     </div>
 
                     <ul class="list-group">
@@ -40,7 +43,6 @@
                         }
                     </ul>
                 </div>
-                @Html.ActionLink("Delete", "Delete", "UserTablau", new { id = item.ID }, null)
             }
         </div>
 
