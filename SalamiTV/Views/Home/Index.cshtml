@@ -108,6 +108,8 @@
                                         [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
                                         <br />
                                     </span>
+                                    @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = item.ID }, null)
+
                                 </li>
                             }
                         }

@@ -52,8 +52,8 @@
                 @Html.DisplayFor(modelItem => item.Duration)
             </td>
             <td>
-                @Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)
-                @*@Html.DisplayFor(modelItem => item.IsInFocus)*@
+                @*@Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)*@
+                @Html.DisplayFor(modelItem => item.IsInFocus)
 
             </td>
             <td>
@@ -66,5 +66,3 @@
 
 </table>
 <input type="submit" value="Spara" />
-</body>
-</html>

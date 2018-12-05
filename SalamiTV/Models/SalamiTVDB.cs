@@ -60,10 +60,17 @@ namespace SalamiTV.Models
                 .Property(e => e.Details)
                 .IsUnicode(false);
 
+               modelBuilder.Entity<TvProgram>()
+                .Property(e => e.Broadcasting).HasColumnType("datetime");
+
+            modelBuilder.Entity<TvProgram>()
+                .Property(e => e.EndTime).HasColumnType("datetime");
+
             modelBuilder.Entity<TvProgram>()
                 .HasMany(e => e.TvProgramCategories)
                 .WithRequired(e => e.TvProgram)
                 .WillCascadeOnDelete(false);
+
 
             modelBuilder.Entity<UserInfo>()
                 .Property(e => e.UserName)

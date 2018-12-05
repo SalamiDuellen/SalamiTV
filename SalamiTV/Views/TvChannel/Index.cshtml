@@ -28,26 +28,26 @@
                         @foreach (var thing in item.TvPrograms)
                         {
                             <li class="list-group-item">
-                              
-                                    <span class="visibleitem">
-                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
-                                        <br />
-                                        @Html.DisplayFor(modelItem => thing.Title)
-                                        <br />
 
-                                    </span>
-                                    <span class="hiddenitem">
-                                        @Html.DisplayFor(modelItem => thing.Details)<br />
+                                <span class="visibleitem">
+                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
+                                    <br />
+                                    @Html.DisplayFor(modelItem => thing.Title)
+                                    <br />
 
-                                        @foreach (var cat in thing.TvProgramCategories)
-                                        {
-                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                        }
-                                        <br />
-                                        [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
-                                        <br />
-                                    </span>
-                                
+                                </span>
+                                <span class="hiddenitem">
+                                    @Html.DisplayFor(modelItem => thing.Details)<br />
+
+                                    @foreach (var cat in thing.TvProgramCategories)
+                                    {
+                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                    }
+                                    <br />
+                                    [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
+                                    <br />
+                                </span>
+
                             </li>
                         }
                     </ul>
@@ -56,18 +56,21 @@
         </div>
     </div>
 </div>
-@foreach (var item in Model)
+@if (Context.User.IsInRole("Admin"))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-        </td>
-    </tr>
+    foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
 }
 <script src="~/Scripts/Resources.js"></script>
 
