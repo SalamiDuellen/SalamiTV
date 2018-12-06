@@ -12,8 +12,6 @@ using SalamiTV.ViewModels;
 
 namespace SalamiTV.Controllers
 {
-
-
     public class HomeController : Controller
     {
         SalamiTVDB dbContext = new SalamiTVDB();

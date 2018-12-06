@@ -211,6 +211,7 @@
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\CreateTvChannelVM.cs" />
     <Compile Include="ViewModels\HomePageVM.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\SalamiTVDB.cs" />
@@ -283,6 +284,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\UserTablau\Delete.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -337,7 +339,6 @@
     <Content Include="Views\TvChannel\Index.cshtml" />
     <Content Include="Views\Home\PartialTvChannel.cshtml" />
     <Content Include="Views\UserTablau\Create.cshtml" />
-    <Content Include="Views\UserTablau\Delete.cshtml" />
     <Content Include="Views\UserTablau\Details.cshtml" />
     <Content Include="Views\UserTablau\Edit.cshtml" />
     <Content Include="Views\UserTablau\Index.cshtml" />

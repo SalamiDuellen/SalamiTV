@@ -33,14 +33,6 @@ textarea {
         background: #BDD4DE;
     }
 }
-/* Tabort*/
-/*#myCarousel {
-    width: 50%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    margin-bottom: 5%;
-}*/
 
 #channelheader {
     /*background-color: #eaf3f7;*/
@@ -76,7 +68,10 @@ textarea {
     border: 2px solid #BDD4DE;
     border-bottom-width: 1px;
 }
-
+.btn btn-default {
+    background: #BDD4DE;
+    color: #BDD4DE;
+}
 .list-group {
     border: 2px solid #BDD4DE;
     border-top-width: 1px;
