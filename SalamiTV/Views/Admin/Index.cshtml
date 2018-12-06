@@ -27,7 +27,7 @@
         <th>
             @Html.DisplayNameFor(model => model.IsInFocus)
         </th>
-        <th></th>
+        <th class="edittable"></th>
     </tr>
 
     @foreach (var item in Model)
@@ -56,7 +56,7 @@
                 @Html.DisplayFor(modelItem => item.IsInFocus)
 
             </td>
-            <td>
+            <td class="edittable">
                 @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) |
                 @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) |
                 @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null)

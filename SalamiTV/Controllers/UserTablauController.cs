@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using SalamiTV.Models;
 using Microsoft.AspNet.Identity;
+using SalamiTV.ViewModels;
 
 namespace SalamiTV.Controllers
 {
@@ -18,13 +19,35 @@ namespace SalamiTV.Controllers
 
         // GET: UserTablau
         //asynk för att den ena querien ska vänta in den andra. Vet dock inte om det behövs här
-        public async Task<ActionResult> Index()
+        public ActionResult Index(int? page)
         {
+            HomePageVM hpVM = new HomePageVM();
             var userId = HttpContext.User.Identity.GetUserId();
 
-            var userTablaus = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+            //Sätter pagenumber till 0 om värdet är null
+            int pageNumber = (page ?? 0);
+            var searchDate = DateTime.Now.AddDays(pageNumber);
+            if (pageNumber != 0)
+            {
+                searchDate = DateTime.Now.AddDays(pageNumber).Date;
+            }
+            var tomorrow = searchDate.AddDays(1).Date;
 
-            return View(await userTablaus.ToListAsync());
+            List<UserTablau> userTablaus = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel).ToList();
+            var newContext = new SalamiTVDB();
+            List<TvChannel> channels = newContext.TvChannels.Select(
+                c => new
+                {
+                    c,
+                    programs = c.TvPrograms.
+                    Where(p => searchDate <= p.Broadcasting && p.Broadcasting <= tomorrow)
+                    .GroupBy(p => p.Broadcasting) /*ASC == default*/
+                })
+                    .ToList().Select(x => x.c).ToList();
+
+            hpVM.RenderToUserTablau(channels, userTablaus);
+
+            return View(hpVM);
         }
 
         public ActionResult AddChannelToTablau()

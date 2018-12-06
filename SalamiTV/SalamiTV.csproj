@@ -239,7 +239,7 @@
     </Content>
     <Content Include="Images\aktuellt.jpg" />
     <Content Include="Images\avengers_thanos.jpg" />
-    <Content Include="Images\me.jpg" />
+    <Content Include="Images\iconfinder_write_126582.png" />
     <Content Include="Images\profilepicture.jpg" />
     <Content Include="Images\samycketbattre.jpg" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -346,6 +346,8 @@
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\TvProgram\Edit.cshtml" />
+    <Content Include="Views\Shared\_partialTvChannel.cshtml" />
+    <Content Include="Views\Shared\_partialPageNavigation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -68,10 +68,12 @@ textarea {
     border: 2px solid #BDD4DE;
     border-bottom-width: 1px;
 }
+
 .btn btn-default {
     background: #BDD4DE;
     color: #BDD4DE;
 }
+
 .list-group {
     border: 2px solid #BDD4DE;
     border-top-width: 1px;
@@ -92,10 +94,12 @@ textarea {
 .hiddenitem {
     display: none;
 }
+
 #aboutusimage img {
     max-height: 100px;
     min-width: 100px;
 }
+
 .row {
     display: -webkit-box;
     display: -webkit-flex;
@@ -108,6 +112,7 @@ textarea {
         display: flex;
         flex-direction: column;
     }
+
 .navbar navbar-light {
     padding-bottom: 1px;
     font-size: 8px;
@@ -119,7 +124,7 @@ textarea {
 }
 /*page navigation*/
 #pagenav {
-    margin:auto;
+    margin: auto;
 }
 /*#region SiteNavigation */
 .navbar-default {
@@ -154,15 +159,15 @@ textarea {
 /*#endregion */
 
 #infocusprogram {
-    
-    overflow:hidden;
-    float:left;
+    overflow: hidden;
+    float: left;
     width: 100%; /* Set width to 100% */
     margin: 10%,30%;
     min-height: 100px;
     max-height: 150px;
     max-width: 200px;
 }
+
 #imgDiv {
     width: 100%;
     max-width: 200px;
@@ -214,4 +219,25 @@ p {
 
 label.error {
     display: inline;
+}
+
+table .edittable {
+    text-align: right;
+}
+
+@media (min-width:1170px) {
+    table .edittable {
+        width: 180px;
+    }
+}
+
+
+td.edittable a {
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-indent: 9999px;
+    background-image: url(/Images/iconfinder_write_126582.png);
+    float: left;
+    margin-right: 5px;
 }

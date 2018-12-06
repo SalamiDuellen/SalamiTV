@@ -33,7 +33,7 @@ namespace SalamiTV.Controllers
 
             var newContext = new SalamiTVDB();
             //Hämtar higlightade program (aka puffar)
-            hpVM.HighlightedProgram =  newContext.TvChannels.SelectMany(x => x.TvPrograms).Where(x => x.IsInFocus == true).ToList();
+            hpVM.HighlightedProgram = newContext.TvChannels.SelectMany(x => x.TvPrograms).Where(x => x.IsInFocus == true).ToList();
 
             // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
             dbContext.Configuration.LazyLoadingEnabled = false;
@@ -44,13 +44,15 @@ namespace SalamiTV.Controllers
         }
 
         [ChildActionOnly]
-        public async Task<ActionResult> PartialTvChannel(int id)
+        public ActionResult PartialTvChannel(int? id)
         {
+            HomePageVM hpVM = new HomePageVM();
             var userId = HttpContext.User.Identity.GetUserId();
-            //var userTablaus = await salamiContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
+            //var userTablaus =  salamiContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel);
 
-            var channel = await dbContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
-            return PartialView(channel);
+            var channel =  dbContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefault(x => x.ID == id);
+            hpVM.TvChannels.Add(channel);
+            return PartialView(hpVM);
         }
 
         public ActionResult About()

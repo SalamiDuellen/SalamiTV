@@ -1,3 +1,4 @@
-﻿@model SalamiTV.Models.TvChannel
+﻿@model SalamiTV.ViewModels.HomePageVM
 
-@Model.Name
+@Html.Partial("_partialPageNavigation", Model)
+@Html.Partial("_partialTvChannel", Model)

@@ -1,4 +1,4 @@
-﻿@model IEnumerable<SalamiTV.Models.UserTablau>
+﻿@model SalamiTV.ViewModels.HomePageVM
 
 @{
     ViewBag.Title = "Min sida";
@@ -9,66 +9,6 @@
 
 </h3>
 
-
-<section class="container-fluid">
-    <div id="tvchannel">
-        <div class="row">
-            @foreach (var item in Model)
-            {
-                <div class="col-xs-12 col-sm-6 col-md-3">
-
-                    <div id="channelheader">
-                        <h4>@Html.DisplayFor(modelItem => item.TvChannel.Name)</h4>
-
-                        @using (Html.BeginForm("Delete", "UserTablau", new { id = item.ID }))
-                        {
-                            @Html.AntiForgeryToken()
-
-                        <div class="form-actions no-color">
-                            @*<input type="submit" value="Delete" class="btn btn-default" />*@
-                            <button type="button" class="btn btn-link" style="color:red;">Ta bort kanalen från min lista</button>
-                        </div>
-                        }
-                        @*@Html.ActionLink("Ta bort från min lista", "Delete", "UserTablau", new { id = item.ID }, null)*@
-                    </div>
-
-                    <ul class="list-group">
-
-                        @foreach (var thing in item.TvChannel.TvPrograms)
-                        {
-
-                            <li class="list-group-item">
-                                <span class="visibleitem">
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
-
-                                    <br />
-                                    @Html.DisplayFor(modelItem => thing.Title)
-                                    @*@Html.DisplayFor(modelItem => thing.Details)*@
-                                    <br />
-
-                                </span>
-
-                                <span class="hiddenitem">
-                                    @Html.DisplayFor(modelItem => thing.Details)<br />
-
-                                    @foreach (var cat in thing.TvProgramCategories)
-                                    {
-                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                    }
-                                    <br />
-                                    [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
-                                    <br />
-                                    @Html.ActionLink("Details", "Details", "UserTablau", new { id = item.ID }, null)
-                                </span>
-                            </li>
-
-
-                        }
-                    </ul>
-                </div>
-            }
-        </div>
-
-    </div>
-</section>
-<script src="~/Scripts/Resources.js"></script>
+@Html.Partial("_partialPageNavigation", Model)
+@Html.Partial("_partialTvChannel", Model)
+}

@@ -1,0 +1,31 @@
+﻿@model SalamiTV.ViewModels.HomePageVM
+
+
+@*page navigation*@
+<section class="container">
+    <div class="row">
+
+        <nav aria-label="Page navigation" id="pagenav">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+                <ul class="pagination">
+                    @*<li>
+                            <a href="#" aria-label="Tidigare">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>*@
+                    @*värdet på datetime.now här för pagingen*@
+                    @for (int i = 0; i < Model.Dates.Count; i++)
+                    {
+                        <li>@Html.ActionLink(Model.Dates[i], "Index", new { page = i })</li>
+                    }
+
+                    @*<li>
+                            <a href="#" aria-label="Nästa">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>*@
+                </ul>
+            </div>
+        </nav>
+    </div>
+</section>
