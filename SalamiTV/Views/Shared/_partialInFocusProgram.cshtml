@@ -1,19 +1,6 @@
-﻿@model SalamiTV.ViewModels.TemporaryViewModel
+﻿@model SalamiTV.Models.TvProgram
 
-@if (Model.InFocusPrograms != null)
-{
-    <section class="container-fluid">
-        <div class="row">
-
-            @foreach (var program in Model.InFocusPrograms)
-            {
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-                    <div id="infocusprogram">
-                        <p>  @Html.ActionLink(program.Title, "Details", "TvProgram", new { id = program.ID }, null)</p>
-                        <p> @Html.DisplayFor(modelItem => program.Details)</p>
-                    </div>
-                </div>
-            }
+        <div id="infocusprogram">
+            <p>  @Html.ActionLink(Model.Title, "Details", "TvProgram", new { id = Model.ID }, null)</p>
+            <p> @Html.DisplayFor(modelItem => Model.Details)</p>
         </div>
-    </section>
-}

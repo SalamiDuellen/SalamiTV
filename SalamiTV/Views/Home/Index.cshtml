@@ -1,19 +1,15 @@
 ﻿@model SalamiTV.ViewModels.TemporaryViewModel
 
-@Html.Partial("_partialInFocusProgram",Model.InFocusPrograms)
-@Html.Action("PartialTvChannel", "Home", new {page = Model.Page })
+@*Programmen som Nicklas refererar till Puffar får sina htmlstrings från partial*@
+<section class="container-fluid">
+    <div class="row">
+        @foreach (var program in Model.InFocusPrograms)
+        {
+            <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                @Html.Partial("_partialInFocusProgram", program)
 
-@*<section class="container-fluid">
-        <div id="tvchannel">
-            <div class="row">
-                @foreach (var channel in Model.TvChannels)
-                {
-                    <div class="col-xs-12 col-sm-6 col-md-3">
-                        <h2 id="channelheader">@channel.Name</h2>
-                        @Html.Action("Partial2", "Home", new { id = channel.ID, page = Model.Page })
-                    </div>
-                }
             </div>
-        </div>
-    </section>
-    <script src="~/Scripts/Resources.js"></script>*@
+        }
+    </div>
+</section>
+@Html.Action("PartialTvChannel", "Home", new { page = Model.Page })
