@@ -1,14 +1,17 @@
-﻿@model SalamiTV.ViewModels.HomePageVM
+﻿@model SalamiTV.ViewModels.TablauParametersVM
 
-@{
-    ViewBag.Title = "Min sida";
+    @{
+        ViewBag.Title = "Min sida";
+    }
+    <h3>
+        Välkommen
+        @ViewBag.UserName @HttpContext.Current.User.Identity.Name
+
+    </h3>
+@foreach (var ID in Model.TvChannelsID)
+{
+    @Html.Action("PartialTvChannel", "Home", new { id = ID})
+
 }
-<h3>
-    Välkommen
-    @ViewBag.UserName @HttpContext.Current.User.Identity.Name
-
-</h3>
-
-@Html.Partial("_partialPageNavigation", Model)
-@Html.Partial("_partialTvChannel", Model)
-}
+    @*@Html.Partial("_partialPageNavigation", Model)
+    @Html.Partial("_partialTvChannel", Model.TvChannels)*@

@@ -43,7 +43,9 @@ textarea {
     /*background-color: #eaf3f7;*/
     /*border: 0px solid #a8bac4;*/
 }
-
+#programcolumn {
+    width:100%;
+}
 #channelcolumns {
     /*background-color:red;*/
 }

@@ -1,130 +1,19 @@
-﻿@model SalamiTV.ViewModels.HomePageVM
+﻿@model SalamiTV.ViewModels.TemporaryViewModel
 
-@{
-    /**/
-
-    ViewBag.title = "programtablå";
-}
-@*page navigation*@
-@*<section class="container">
-    <div class="row">
-
-        <nav aria-label="Page navigation" id="pagenav">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-                <ul class="pagination">
-                    @*<li>
-                            <a href="#" aria-label="Tidigare">
-                                <span aria-hidden="true">&laquo;</span>
-                            </a>
-                        </li>*@
-@*värdet på datetime.now här för pagingen*@
-@*@for (int i = 0; i < Model.Dates.Count; i++)
-    {
-        <li>@Html.ActionLink(Model.Dates[i], "Index", new { page = i })</li>
-    }*@
-
-@*<li>
-        <a href="#" aria-label="Nästa">
-            <span aria-hidden="true">&raquo;</span>
-        </a>
-    </li>*@
-@*     </ul>
-                </div>
-            </nav>
-        </div>
-    </section>
-
-    <section class="container-fluid">
-        <div class="row">
-
-            @foreach (var tvProgram in Model.HighlightedProgram)
-            {
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-                    <div id="infocusprogram">
-                        <p>  @Html.ActionLink(tvProgram.Title, "Details", "TvProgram", new { id = tvProgram.ID }, null)</p>
-                        <p> @Html.DisplayFor(modelItem => tvProgram.Details)</p>
-                    </div>
-                </div>
-            }
-        </div>
-    </section>*@
-@foreach (var item in Model.TvChannels)
-{
-    @Html.Action("PartialTvChannel", "Home", new { id = item.ID })
-}
-
-    @*@Html.Partial("_partialPageNavigation", Model)
-    @Html.Partial("_partialTvChannel", Model)*@
+@Html.Partial("_partialInFocusProgram",Model.InFocusPrograms)
+@Html.Action("PartialTvChannel", "Home", new {page = Model.Page })
 
 @*<section class="container-fluid">
         <div id="tvchannel">
             <div class="row">
-                @foreach (var item in Model.TvChannels)
+                @foreach (var channel in Model.TvChannels)
                 {
                     <div class="col-xs-12 col-sm-6 col-md-3">
-                        <div id="channelheader">
-                            <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
-                        </div>
-                        <ul class="list-group">
-                            @foreach (var thing in item.TvPrograms)
-                            {
-                                if (thing.EndTime > DateTime.Now && thing.Broadcasting < DateTime.Now)
-                                {
-                                    <li class="list-group-item">
-                                        <span class="visibleitem">
-                                            Pågående!
-                                            @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
-                                            <br />
-                                            @Html.DisplayFor(modelItem => thing.Title)
-                                            <br />
-
-                                        </span>
-                                        <span class="hiddenitem">
-                                            @Html.DisplayFor(modelItem => thing.Details)<br />
-
-                                            @foreach (var cat in thing.TvProgramCategories)
-                                            {
-                                                @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                            }
-                                            <br />
-                                            [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
-                                            <br />
-                                        </span>
-                                    </li>
-                                }
-                                else
-                                {
-
-                                    <li class="list-group-item">
-
-                                        <span class="visibleitem">
-                                            @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
-                                            <br />
-                                            @Html.DisplayFor(modelItem => thing.Title)
-                                            <br />
-
-                                        </span>
-                                        <span class="hiddenitem">
-                                            @Html.DisplayFor(modelItem => thing.Details)<br />
-
-                                            @foreach (var cat in thing.TvProgramCategories)
-                                            {
-                                                @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                            }
-                                            <br />
-                                            [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
-                                            <br />
-                                        </span>
-                                        @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = item.ID }, null)
-
-                                    </li>
-                                }
-                            }
-                        </ul>
+                        <h2 id="channelheader">@channel.Name</h2>
+                        @Html.Action("Partial2", "Home", new { id = channel.ID, page = Model.Page })
                     </div>
                 }
             </div>
         </div>
     </section>
     <script src="~/Scripts/Resources.js"></script>*@
-

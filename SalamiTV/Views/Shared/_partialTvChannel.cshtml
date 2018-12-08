@@ -1,8 +1,22 @@
-﻿@model SalamiTV.ViewModels.HomePageVM
+﻿@model SalamiTV.ViewModels.TemporaryViewModel
 
+<section class="container-fluid">
+    <div id="tvchannel">
+        <div class="row">
+            @foreach (var channel in Model.TvChannels)
+            {
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <h2 id="channelheader">
+                        @Html.Display(channel.Name)
+                    </h2>
+                    @Html.Action("Partial2", "Home", new { id = channel.ID, page = Model.Page })
+                </div>
+            }
+        </div>
+    </div>
+</section>
 
-
-@*page navigation*@
+@*page navigation
 @*<section class="container">
     <div class="row">
 
@@ -30,30 +44,32 @@
             </nav>
         </div>
     </section>*@
-@if (Model.HighlightedProgram != null)
-{
-    <section class="container-fluid">
-        <div class="row">
+@*@if (Model.HighlightedProgram != null)
+    {
+        <section class="container-fluid">
+            <div class="row">
 
-            @foreach (var tvProgram in Model.HighlightedProgram)
-            {
-                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-                    <div id="infocusprogram">
-                        <p>  @Html.ActionLink(tvProgram.Title, "Details", "TvProgram", new { id = tvProgram.ID }, null)</p>
-                        <p> @Html.DisplayFor(modelItem => tvProgram.Details)</p>
+                @foreach (var tvProgram in Model.HighlightedProgram)
+                {
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+                        <div id="infocusprogram">
+                            <p>  @Html.ActionLink(tvProgram.Title, "Details", "TvProgram", new { id = tvProgram.ID }, null)</p>
+                            <p> @Html.DisplayFor(modelItem => tvProgram.Details)</p>
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
-    </section>
-}
+                }
+            </div>
+        </section>
+    }*@
 
 
-<section class="container-fluid">
+@*<section class="container-fluid">
     <div id="tvchannel">
         <div class="row">
-            @foreach (var item in Model.TvChannels)
+            @foreach (var item in Model)
             {
+
+
                 <div class="col-xs-12 col-sm-6 col-md-3">
                     <div id="channelheader">
                         <h4>@Html.DisplayFor(modelItem => item.Name)</h4>
@@ -107,10 +123,16 @@
                                         <br />
                                         [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
                                         <br />
-                                    </span>
-                                    @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = item.ID }, null)
+                                    </span>*@
+                                    @*Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = item.ID }, null)
 
                                 </li>
+                            }
+                            if (Context.User.IsInRole("Admin"))
+                            {
+                                Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null);
+                                Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null);
+                                Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null);
                             }
                         }
                     </ul>
@@ -119,4 +141,4 @@
         </div>
     </div>
 </section>
-<script src="~/Scripts/Resources.js"></script>
+<script src="~/Scripts/Resources.js"></script>*@

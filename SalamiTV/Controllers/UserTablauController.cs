@@ -17,38 +17,16 @@ namespace SalamiTV.Controllers
     {
         private SalamiTVDB dbContext = new SalamiTVDB();
 
-        // GET: UserTablau
-        //asynk för att den ena querien ska vänta in den andra. Vet dock inte om det behövs här
-        public ActionResult Index(int? page)
+        public ActionResult Index(int page = 0)
         {
-            HomePageVM hpVM = new HomePageVM();
-            var userId = HttpContext.User.Identity.GetUserId();
-
-            //Sätter pagenumber till 0 om värdet är null
-            int pageNumber = (page ?? 0);
-            var searchDate = DateTime.Now.AddDays(pageNumber);
-            if (pageNumber != 0)
+            var userID = HttpContext.User.Identity.GetUserId();
+            var model = new TablauParametersVM
             {
-                searchDate = DateTime.Now.AddDays(pageNumber).Date;
-            }
-            var tomorrow = searchDate.AddDays(1).Date;
-
-            List<UserTablau> userTablaus = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userId).Include(u => u.TvChannel).ToList();
-            var newContext = new SalamiTVDB();
-            List<TvChannel> channels = newContext.TvChannels.Select(
-                c => new
-                {
-                    c,
-                    programs = c.TvPrograms.
-                    Where(p => searchDate <= p.Broadcasting && p.Broadcasting <= tomorrow)
-                    .GroupBy(p => p.Broadcasting) /*ASC == default*/
-                })
-                    .ToList().Select(x => x.c).ToList();
-
-            hpVM.RenderToUserTablau(channels, userTablaus);
-
-            return View(hpVM);
-        }
+                TvChannelsID = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userID).Select(x => x.TvChannelID).ToList(),
+                Page = page
+            };
+            return View(model);
+        }//Går in i layout
 
         public ActionResult AddChannelToTablau()
         {

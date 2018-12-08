@@ -1,0 +1,10 @@
+﻿@model SalamiTV.ViewModels.SearchProgramVM
+@{
+    /**/
+
+    ViewBag.title = "programtablå";
+}
+
+@Html.Partial("_partialPageNavigation", Model)
+@Html.Partial("_partialHighligtedPrograms", Model)
+@Html.Partial("_partialTvChannel", Model.TvChannels)

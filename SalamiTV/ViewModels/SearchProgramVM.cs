@@ -8,37 +8,34 @@ namespace SalamiTV.ViewModels
 {
     public class SearchProgramVM
     {
-        public List<TvChannel> GetTvChannels { get; set; }
-        public List<TvChannel> SetTvChannels { get; set; }
+        public List<TvChannel> TvChannels { get; set; }
         public List<TvProgram> HighlightedProgram { get; set; }
 
         public List<string> Dates { get; set; }
-        public int? Page { get; set; }
-        public int? ID { get; set; }
-        public TvChannel TvChannel { get; set; }
 
 
-        public void RenderToUserTablau(List<TvChannel> tvChannels, List<UserTablau> userTablaus)
+        public List<TvChannel> RenderToUserTablau(List<TvChannel> tvChannels, List<UserTablau> userTablaus)
         {
+            List<TvChannel> channels = new List<TvChannel>();
             foreach (var channel in tvChannels)
             {
                 foreach (var tablau in userTablaus)
                 {
                     if (channel.ID == tablau.TvChannelID)
                     {
-                        GetTvChannels.Add(channel);
+                        channels.Add(channel);
                         break;
                     }
                 }
             }
+            return channels;
 
         }
 
         public SearchProgramVM()
         {
             ReturnDateStrings();
-            GetTvChannels = new List<TvChannel>();
-            SetTvChannels = new List<TvChannel>();
+            TvChannels = new List<TvChannel>();
         }
 
         void ReturnDateStrings()

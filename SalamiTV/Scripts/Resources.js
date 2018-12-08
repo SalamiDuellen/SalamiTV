@@ -1,24 +1,15 @@
-﻿$(".visibleitem").click(function () {
-
+﻿// måste vara klassnamn annars anser den att alla element i li ska räknas och togglar efter det
+$(".visibleitem").click(function () {
+    // enskilda elementet
     $header = $(this);
-    //getting the next element
+    //nästa element
     $content = $header.next();
-    //open up the content needed - toggle the slide- if visible, slide up, if not slidedown.
+    //togglar slidern
     $content.slideToggle(500, function () {
-        //execute this after slideToggle is done
-        //change text of header based on visibility of content div
+     //printar det som döljs vid av upslider
         $header.text(function () {
-            //change text based on condition
             //return $content.is(":visible") ? "Collapse" : "Expand";
         });
     });
 
 });
-//});
-//(function myFunction(item) {
-//    var x = document.getElementById("#hiddenitem");
-//    for (var i in item) {
-//        alert(i);
-
-//    }
-//});
