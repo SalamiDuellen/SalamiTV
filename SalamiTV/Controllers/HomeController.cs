@@ -53,7 +53,7 @@ namespace SalamiTV.Controllers
         public ActionResult Index(int page = 0)
         {
             //var channels = dbContext.TvChannels.ToList();
-            var model = new TemporaryViewModel
+            var model = new SearchProgramVM
             {
                 InFocusPrograms = dbContext.TvPrograms.Select(x => x).Where(x => x.IsInFocus == true).ToList(),
                 Page = page
