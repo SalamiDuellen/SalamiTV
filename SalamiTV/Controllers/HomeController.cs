@@ -66,15 +66,14 @@ namespace SalamiTV.Controllers
         [ChildActionOnly]
         public ActionResult PartialTvChannel(/*int? id, */int page)
         {
-            //TODO: måste kunna hämta kanal utefterid. Men som det såg ut förut så skapade  en ny
-            //TemporaryViewModel varje ggn vybn loopade igenom listan med id och bara den sista hämtade kanalen syntes.
+            //TODO: usertablaulistan visas i fel order
 
             var userID = HttpContext.User.Identity.GetUserId();
             if (userID == null)
             {
                 var model = new TemporaryViewModel
                 {
-                    TvChannels = dbContext.TvChannels.ToList(),
+                    TvChannels = dbContext.TvChannels.OrderByDescending(x=>x.ID).ToList(),
                     Page = page
                 };
                 return PartialView(model);
@@ -84,6 +83,7 @@ namespace SalamiTV.Controllers
                 var model = new TemporaryViewModel
                 {
                     TvChannels = dbContext.UserTablaus.Where(y => y.AspNetUsersId == userID).Select(x => x.TvChannel).ToList(),
+                    
                     Page = page
                 };
                 return PartialView(model);
@@ -104,9 +104,8 @@ namespace SalamiTV.Controllers
             var to = from.Date.AddDays(1);
 
             var programs = dbContext.TvChannels
-                .Find(id)?
-                .TvPrograms.Where(p => from < p.Broadcasting && p.Broadcasting < to)
-                .ToList();
+            .Find(id)?
+            .TvPrograms.Where(p => from < p.EndTime && p.Broadcasting < to).OrderBy(x=>x.Broadcasting).ToList();
 
             return PartialView("_partialIndex", programs);
         }
