@@ -9,28 +9,30 @@ namespace SalamiTV.ViewModels
     public class SearchProgramVM
     {
         public List<TvChannel> TvChannels { get; set; }
-        public List<TvProgram> HighlightedProgram { get; set; }
+        public List<TvProgram> InFocusPrograms { get; set; }
 
         public List<string> Dates { get; set; }
+        public int Page { get; set; }
 
 
-        public List<TvChannel> RenderToUserTablau(List<TvChannel> tvChannels, List<UserTablau> userTablaus)
-        {
-            List<TvChannel> channels = new List<TvChannel>();
-            foreach (var channel in tvChannels)
-            {
-                foreach (var tablau in userTablaus)
-                {
-                    if (channel.ID == tablau.TvChannelID)
-                    {
-                        channels.Add(channel);
-                        break;
-                    }
-                }
-            }
-            return channels;
 
-        }
+        //public List<TvChannel> RenderToUserTablau(List<TvChannel> tvChannels, List<UserTablau> userTablaus)
+        //{
+        //    List<TvChannel> channels = new List<TvChannel>();
+        //    foreach (var channel in tvChannels)
+        //    {
+        //        foreach (var tablau in userTablaus)
+        //        {
+        //            if (channel.ID == tablau.TvChannelID)
+        //            {
+        //                channels.Add(channel);
+        //                break;
+        //            }
+        //        }
+        //    }
+        //    return channels;
+
+        //}
 
         public SearchProgramVM()
         {

@@ -64,30 +64,31 @@ namespace SalamiTV.Controllers
 
         //GET TvChannels
         [ChildActionOnly]
-        public ActionResult PartialTvChannel(int? id, int page)
+        public ActionResult PartialTvChannel(/*int? id, */int page)
         {
-            if (id == null)
+            //TODO: måste kunna hämta kanal utefterid. Men som det såg ut förut så skapade  en ny
+            //TemporaryViewModel varje ggn vybn loopade igenom listan med id och bara den sista hämtade kanalen syntes.
+
+            var userID = HttpContext.User.Identity.GetUserId();
+            if (userID == null)
             {
-                var channels = dbContext.TvChannels.ToList();
                 var model = new TemporaryViewModel
                 {
-                    TvChannels = channels,
+                    TvChannels = dbContext.TvChannels.ToList(),
                     Page = page
                 };
                 return PartialView(model);
-
             }
             else
             {
-                var channels = dbContext.TvChannels.Select(x => x).Where(x => x.ID == id);
                 var model = new TemporaryViewModel
                 {
-                    TvChannels = channels,
+                    TvChannels = dbContext.UserTablaus.Where(y => y.AspNetUsersId == userID).Select(x => x.TvChannel).ToList(),
                     Page = page
                 };
                 return PartialView(model);
-
             }
+
         }
 
         //GET TvPrograms

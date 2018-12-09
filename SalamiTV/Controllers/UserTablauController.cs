@@ -19,14 +19,15 @@ namespace SalamiTV.Controllers
 
         public ActionResult Index(int page = 0)
         {
-            var userID = HttpContext.User.Identity.GetUserId();
-            var model = new TablauParametersVM
+            //var userID = HttpContext.User.Identity.GetUserId();
+            var model = new SearchProgramVM
             {
-                TvChannelsID = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userID).Select(x => x.TvChannelID).ToList(),
                 Page = page
             };
+
             return View(model);
-        }//Går in i layout
+
+     }//
 
         public ActionResult AddChannelToTablau()
         {
