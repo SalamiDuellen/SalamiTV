@@ -53,7 +53,8 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
-                    <li><a href="/">Tablå</a></li>
+                    <li>@Html.ActionLink("Visa alla kanaler", "Index", "Home", new { showAll = true }, null)</li>
+                    <li>@Html.ActionLink("Visa mina kanaler", "Index", "Home", new { showAll = false }, null)</li>
                     <li>@Html.ActionLink("Om oss", "About", "Home")</li>
                     @*<li><a href="/Home/Contact">Kontakta oss</a></li>*@
                 </ul>
@@ -82,6 +83,7 @@
                     @*lägga till isinrole för admin och länka till adminsida*@
                     else if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Admin"))
                     {
+                        //Lägga id för den inloggade och skicka in den till index så att man kan söka på antingen id eller alla
                         <li>  @Html.ActionLink("Logga ut", "LogOff", "Account")</li>
                         <li>  @Html.ActionLink("Adminsida", "Index", "Admin")</li>
                         <li><a href="~/UserTablau/Index"><span class="glyphicon glyphicon-home"></span></a></li>

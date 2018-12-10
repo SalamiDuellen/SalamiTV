@@ -11,7 +11,7 @@
                 <li class="list-group-item">
                     <span class="visibleitem">
                         Pågående!
-                        <br/>
+                        <br />
                         @Html.DisplayFor(modelItem => program.Broadcasting.TimeOfDay).ToString().Remove(5)
                         <br />
                         @Html.DisplayFor(modelItem => program.Title)
@@ -28,6 +28,7 @@
                         <br />
                         [ @Html.DisplayFor(modelItem => program.EndTime).ToString().Remove(16)]
                         <br />
+                        @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = program.TvChannelID }, null)
                     </span>
                 </li>
             }
@@ -54,7 +55,8 @@
                         [ @Html.DisplayFor(modelItem => program.EndTime).ToString().Remove(16)]
                         <br />
                     </span>
-                    @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = program.ID }, null)
+                    @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = program.TvChannelID }, null)
+
 
                 </li>
             }

@@ -1,9 +1,9 @@
 ﻿@model SalamiTV.ViewModels.SearchProgramVM
 
-@Html.Partial("_partialPageNavigation", Model)
-@*Programmen som Nicklas refererar till Puffar får sina htmlstrings från partial*@
 <section class="container-fluid">
     <div class="row">
+@Html.Partial("_partialPageNavigation", Model.GetDates)
+        @*Programmen som Nicklas refererar till Puffar får sina htmlstrings från partial*@
         @foreach (var program in Model.InFocusPrograms)
         {
             <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
@@ -13,4 +13,6 @@
         }
     </div>
 </section>
-@Html.Action("PartialTvChannel", "Home", new { page = Model.Page })
+<h3 channelheader>
+    @Html.Action("PartialTvChannel", "Home", new { id = Model.AspNetUserID, page = Model.Page })
+</h3>

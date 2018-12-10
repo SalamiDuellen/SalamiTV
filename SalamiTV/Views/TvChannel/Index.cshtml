@@ -1,76 +1,92 @@
-﻿@model IEnumerable<SalamiTV.Models.TvChannel>
+﻿@model SalamiTV.ViewModels.ShowChannelByIDVM
 
-@{
-    //ViewBag.Title = "Index";
-}
+<section class="container-fluid">
+    <div id="tvchannel">
+        <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3">
+                    <h2 id="channelheader">@Model.TvChannel.Name</h2>
+                    @Html.Action("Partial2", "Home", new { id = Model.TvChannel.ID, page = Model.Page })
+                </div>
+        </div>
+    </div>
+</section>
+<script src="~/Scripts/Resources.js"></script>
 
+
+
+
+@*@model SalamiTV.ViewModels.SearchProgramVM
 
 <h2>
     Kanalsida
 </h2>
 
+@Html.Partial("_partialPageNavigation", Model.GetDates)
+<h3 channelheader>
+    @Html.Action("PartialTvChannelForID", "Home", new { Model })
+</h3>*@
 
-<div class="container-fluid">
-    <div id="tvchannel">
-        <div class="row">
+@*<div class="container-fluid">
+        <div id="tvchannel">
+            <div class="row">
 
-            @foreach (var item in Model)
-            {
+                @foreach (var item in Model)
+                {
 
-                <div class="col-xs-12 col-sm-6 col-md-3">
-                    <div id="channelheader">
-                        <h4>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </h4>
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div id="channelheader">
+                            <h4>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </h4>
 
+                        </div>
+                        <ul class="list-group">
+                            @foreach (var thing in item.TvPrograms)
+                            {
+                                <li class="list-group-item">
+
+                                    <span class="visibleitem">
+                                        @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
+                                        <br />
+                                        @Html.DisplayFor(modelItem => thing.Title)
+                                        <br />
+
+                                    </span>
+                                    <span class="hiddenitem">
+                                        @Html.DisplayFor(modelItem => thing.Details)<br />
+
+                                        @foreach (var cat in thing.TvProgramCategories)
+                                        {
+                                            @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
+                                        }
+                                        <br />
+                                        [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
+                                        <br />
+                                    </span>
+
+                                </li>
+                            }
+                        </ul>
                     </div>
-                    <ul class="list-group">
-                        @foreach (var thing in item.TvPrograms)
-                        {
-                            <li class="list-group-item">
-
-                                <span class="visibleitem">
-                                    @Html.DisplayFor(modelItem => thing.Broadcasting.TimeOfDay).ToString().Remove(5)
-                                    <br />
-                                    @Html.DisplayFor(modelItem => thing.Title)
-                                    <br />
-
-                                </span>
-                                <span class="hiddenitem">
-                                    @Html.DisplayFor(modelItem => thing.Details)<br />
-
-                                    @foreach (var cat in thing.TvProgramCategories)
-                                    {
-                                        @Html.DisplayFor(modelItem => cat.Category.Genre)<br />
-                                    }
-                                    <br />
-                                    [ @Html.DisplayFor(modelItem => thing.EndTime).ToString().Remove(16)]
-                                    <br />
-                                </span>
-
-                            </li>
-                        }
-                    </ul>
-                </div>
-            }
+                }
+            </div>
         </div>
-    </div>
-</div>
-@if (Context.User.IsInRole("Admin"))
-{
-    foreach (var item in Model)
+    </div>*@
+@*@if (Context.User.IsInRole("Admin"))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-            </td>
-        </tr>
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
     }
-}
-<script src="~/Scripts/Resources.js"></script>
+    <script src="~/Scripts/Resources.js"></script>*@
 

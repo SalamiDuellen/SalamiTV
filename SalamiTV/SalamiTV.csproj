@@ -209,6 +209,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\GetDates.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Models\UserTablau.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\ShowChannelByIDVM.cs" />
     <Compile Include="ViewModels\TablauParametersVM.cs" />
     <Compile Include="ViewModels\TemporaryViewModel.cs" />
   </ItemGroup>
@@ -352,7 +354,7 @@
     <Content Include="Views\Shared\_partialTvChannel.cshtml" />
     <Content Include="Views\Shared\_partialPageNavigation.cshtml" />
     <Content Include="Views\Shared\_partialInFocusProgram.cshtml" />
-    <Content Include="Views\Home\_partialIndex.cshtml" />
+    <Content Include="Views\Shared\_partialIndex.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>

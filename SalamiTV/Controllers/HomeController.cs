@@ -16,64 +16,45 @@ namespace SalamiTV.Controllers
     {
         SalamiTVDB dbContext = new SalamiTVDB();
 
-        //public ActionResult Index2(int? page)
-        //{
-        //    SearchProgramVM spVM = new SearchProgramVM();
-        //    var userId = HttpContext.User.Identity.GetUserId();
-
-
-        //    //Sätter pagenumber till 0 om värdet är null
-        //    int pageNumber = (page ?? 0);
-        //    var searchDate = DateTime.Now.AddDays(pageNumber);
-        //    if (pageNumber != 0)
-        //    {
-        //        searchDate = DateTime.Now.AddDays(pageNumber).Date;
-        //    }
-        //    var tomorrow = searchDate.AddDays(1).Date;
-
-        //    var newContext = new SalamiTVDB();
-        //    //Hämtar higlightade program (aka puffar)
-        //    spVM.HighlightedProgram = newContext.TvChannels.SelectMany(x => x.TvPrograms).Where(x => x.IsInFocus == true).ToList();
-
-        //    // LazyLoading = false; för att det första statementet måste exikviera för att det ska kunna användas i den andra funktionen.
-        //    dbContext.Configuration.LazyLoadingEnabled = false;
-        //    spVM.TvChannels = dbContext.TvChannels.
-        //        Select(c => new
-        //        {
-        //            c,
-        //            programs = c.TvPrograms
-        //        .Where(p => searchDate <= p.Broadcasting && p.Broadcasting <= tomorrow)
-        //        .GroupBy(p => p.Broadcasting) /*ASC == default*/
-        //        }).ToList().Select(x => x.c).ToList();
-
-
-        //    return View(spVM);
-        //}
-
-        public ActionResult Index(int page = 0)
+        public ActionResult Index(bool showAll = false, int page = 0)
         {
             //var channels = dbContext.TvChannels.ToList();
-            var model = new SearchProgramVM
+            if (showAll == false)
             {
-                InFocusPrograms = dbContext.TvPrograms.Select(x => x).Where(x => x.IsInFocus == true).ToList(),
-                Page = page
-            };
-            return View(model);
+                var model = new SearchProgramVM
+                {
+                    InFocusPrograms = dbContext.TvPrograms.Select(x => x).Where(x => x.IsInFocus == true).ToList(),
+                    Page = page,
+                    AspNetUserID = User.Identity.GetUserId()
+                };
+                return View(model);
+
+            }
+            else
+            {
+
+                var model = new SearchProgramVM
+                {
+                    InFocusPrograms = dbContext.TvPrograms.Select(x => x).Where(x => x.IsInFocus == true).ToList(),
+                    Page = page
+                };
+                return View(model);
+            }
         }
 
 
         //GET TvChannels
         [ChildActionOnly]
-        public ActionResult PartialTvChannel(/*int? id, */int page)
+        public ActionResult PartialTvChannel(string id, int page = 0)
         {
             //TODO: usertablaulistan visas i fel order
 
-            var userID = HttpContext.User.Identity.GetUserId();
-            if (userID == null)
+            //var userID = HttpContext.User.Identity.GetUserId();
+            if (id == null)
             {
                 var model = new TemporaryViewModel
                 {
-                    TvChannels = dbContext.TvChannels.OrderByDescending(x=>x.ID).ToList(),
+                    TvChannels = dbContext.TvChannels.OrderByDescending(x => x.ID).ToList(),
                     Page = page
                 };
                 return PartialView(model);
@@ -82,8 +63,8 @@ namespace SalamiTV.Controllers
             {
                 var model = new TemporaryViewModel
                 {
-                    TvChannels = dbContext.UserTablaus.Where(y => y.AspNetUsersId == userID).Select(x => x.TvChannel).ToList(),
-                    
+                    TvChannels = dbContext.UserTablaus.Where(y => y.AspNetUsersId == id).Select(x => x.TvChannel).ToList(),
+
                     Page = page
                 };
                 return PartialView(model);
@@ -105,7 +86,7 @@ namespace SalamiTV.Controllers
 
             var programs = dbContext.TvChannels
             .Find(id)?
-            .TvPrograms.Where(p => from < p.EndTime && p.Broadcasting < to).OrderBy(x=>x.Broadcasting).ToList();
+            .TvPrograms.Where(p => from < p.EndTime && p.Broadcasting < to).OrderBy(x => x.Broadcasting).ToList();
 
             return PartialView("_partialIndex", programs);
         }

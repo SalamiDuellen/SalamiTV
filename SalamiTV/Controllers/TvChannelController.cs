@@ -8,35 +8,24 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using SalamiTV.Models;
+using SalamiTV.ViewModels;
 
 namespace SalamiTV.Controllers
 {
     public class TvChannelController : Controller
     {
         private SalamiTVDB dbContext = new SalamiTVDB();
-
-        //[ChildActionOnly]
-        public async Task<ActionResult> PartialTvChannel(int id)
-        {
-            var channel = await dbContext.TvChannels.Include(x => x.TvPrograms).FirstOrDefaultAsync(x => x.ID == id).ConfigureAwait(false);
-            return PartialView(channel);
-        }
-
+        
         // GET: TvChannel
-        public ActionResult Index(int? id)
+        public ActionResult Index(int id, int page = 0)
         {
-            var searchDate = DateTime.Now;
-            var tomorrow = searchDate.AddDays(1).Date;
-
-            dbContext.Configuration.LazyLoadingEnabled = false;
-
-            var channel = dbContext.TvChannels.Where(x => x.ID == id).Select(c => new
+            var model = new ShowChannelByIDVM
             {
-                c,
-                programs = c.TvPrograms.Where(p => searchDate <= p.Broadcasting && p.Broadcasting < tomorrow)
-                .OrderBy(p => p.Broadcasting)
-            }).ToList().Select(x => x.c).ToList();
-            return View(channel);
+                TvChannel = dbContext.TvChannels.Find(id),
+                Page = page
+            };
+
+            return View(model);
         }
 
         // GET: TvChannel/Details/5

@@ -11,8 +11,10 @@ namespace SalamiTV.ViewModels
         public List<TvChannel> TvChannels { get; set; }
         public List<TvProgram> InFocusPrograms { get; set; }
 
-        public List<string> Dates { get; set; }
+        //public List<string> Dates { get; set; }
         public int Page { get; set; }
+        public string AspNetUserID { get; set; }
+        public GetDates GetDates { get; set; }
 
 
 
@@ -36,19 +38,20 @@ namespace SalamiTV.ViewModels
 
         public SearchProgramVM()
         {
-            ReturnDateStrings();
+            //ReturnDateStrings();
+            GetDates = new GetDates();
             TvChannels = new List<TvChannel>();
         }
 
-        void ReturnDateStrings()
-        {
-            Dates = new List<string>();
-            for (int i = 0; i < 7; i++)
-            {
-                var dates = DateTime.Today.Date.AddDays(i).ToShortDateString();
-                Dates.Add(dates);
+        //void ReturnDateStrings()
+        //{
+        //    Dates = new List<string>();
+        //    for (int i = 0; i < 7; i++)
+        //    {
+        //        var dates = DateTime.Today.Date.AddDays(i).ToShortDateString();
+        //        Dates.Add(dates);
 
-            }
-        }
+        //    }
+        //}
     }
 }
