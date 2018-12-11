@@ -222,7 +222,9 @@ p {
 label.error {
     display: inline;
 }
-
+p #adminmenu {
+    float:right;
+}
 table .edittable {
     text-align: right;
 }

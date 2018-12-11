@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using PagedList;
 using SalamiTV.ViewModels;
+using Newtonsoft.Json;
 
 namespace SalamiTV.Controllers
 {

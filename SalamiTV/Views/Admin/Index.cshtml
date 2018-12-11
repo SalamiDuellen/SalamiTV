@@ -1,70 +1,82 @@
 ﻿@model IEnumerable<SalamiTV.Models.TvProgram>
 
+@{
+    ViewBag.Message = "Admin";
+}
 
+<h2>
+    Hantera program
+</h2>
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Lägg till program", "Create", "TvProgram")
+    <br />
+    @Html.ActionLink("Lägg till tvkanal", "Create", "TvChannel")
 </p>
-<section>
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.TvChannel.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Details)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Broadcasting)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EndTime)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Duration)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsInFocus)
-            </th>
-            <th class="edittable"></th>
-        </tr>
+<section class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.TvChannel.Name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Details)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Broadcasting)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.EndTime)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Duration)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsInFocus)
+                    </th>
+                    <th class="edittable"></th>
+                </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TvChannel.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayTextFor(modelItem => item.Details)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Broadcasting)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EndTime)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Duration)
-                </td>
-                <td>
-                    @*@Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)*@
-                    @Html.DisplayFor(modelItem => item.IsInFocus)
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TvChannel.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayTextFor(modelItem => item.Details)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Broadcasting)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.EndTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Duration)
+                        </td>
+                        <td>
+                            @*@Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)*@
+                            @Html.DisplayFor(modelItem => item.IsInFocus)
 
-                </td>
-                <td class="edittable">
-                    @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) |
-                    @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) |
-                    @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null)
-                </td>
-            </tr>
-        }
+                        </td>
+                        <td class="edittable">
+                            @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) |
+                            @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) |
+                            @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null) |
+                        </td>
+                    </tr>
+                }
 
-    </table>
+            </table>
+        </div>
+    </div>
 </section>
 <input type="submit" value="Spara" />
