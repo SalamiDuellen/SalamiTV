@@ -85,9 +85,11 @@ namespace SalamiTV.Controllers
 
             var to = from.Date.AddDays(1);
 
-            var programs = dbContext.TvChannels
-            .Find(id)?
-            .TvPrograms.Where(p => from < p.EndTime && p.Broadcasting < to).OrderBy(x => x.Broadcasting).ToList();
+            var programs = dbContext.TvPrograms.Where(p => from < p.EndTime && p.Broadcasting < to).Include(y => y.TvProgramCategories).Include(y => y.TvChannel).Where(y => y.TvChannelID == id).OrderBy(x => x.Broadcasting).ToList();
+
+            //var programs = dbContext.TvChannels
+            //.Find(id)?
+            //.TvPrograms.Where(p => from < p.EndTime && p.Broadcasting < to).OrderBy(x => x.Broadcasting).ToList();
 
             return PartialView("_partialIndex", programs);
         }
@@ -105,12 +107,6 @@ namespace SalamiTV.Controllers
 
             return View();
         }
-
-        //public ActionResult PartialTvChannel(int channelID, int page = 0)
-        //{
-        //    var tvChannel = dbContext.TvChannels.Where(x => x.ID == channelID).ToList();
-        //    return View();
-        //}
 
     }
 }

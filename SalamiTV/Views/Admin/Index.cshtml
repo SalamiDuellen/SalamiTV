@@ -18,25 +18,32 @@
             <table class="table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.TvChannel.Name)
+                        Kanal
+                        @*@Html.DisplayNameFor(model => model.TvChannel.Name)*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Title)
+                        Titel
+                        @*@Html.DisplayNameFor(model => model.Title)*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Details)
+                        Information
+                        @*@Html.DisplayNameFor(model => model.Details)*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Broadcasting)
+                        Sändningstid / datum
+                        @*@Html.DisplayNameFor(model => model.Broadcasting)*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.EndTime)
+                        Sluttid
+                        @*@Html.DisplayNameFor(model => model.EndTime)*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Duration)
+                        Längd
+                        @*@Html.DisplayNameFor(model => model.Duration)*@
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.IsInFocus)
+                        Är puff? 
+                        @*@Html.DisplayNameFor(model => model.IsInFocus)*@
                     </th>
                     <th class="edittable"></th>
                 </tr>
@@ -68,9 +75,9 @@
 
                         </td>
                         <td class="edittable">
-                            @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) |
-                            @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) |
-                            @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null) |
+                            @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) 
+                            @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) 
+                            @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null) 
                         </td>
                     </tr>
                 }

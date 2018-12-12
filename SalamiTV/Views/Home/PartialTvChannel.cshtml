@@ -6,7 +6,7 @@
                 @foreach (var channel in Model.TvChannels)
                 {
                     <div class="col-xs-12 col-sm-6 col-md-3">
-                        <h2 id="channelheader">@channel.Name</h2>
+                        <h3 id="channelheader">@channel.Name</h3>
                         @Html.Action("Partial2", "Home", new { id = channel.ID, page = Model.Page })
                     </div>
                 }

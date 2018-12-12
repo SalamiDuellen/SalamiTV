@@ -88,7 +88,7 @@ namespace SalamiTV.Controllers
         public ActionResult Create()
         {
             ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name");
-            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName");
+            //ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName");
             return View();
         }
 
@@ -107,7 +107,7 @@ namespace SalamiTV.Controllers
             }
 
             ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            //ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
             return View(userTablau);
         }
 
@@ -124,7 +124,7 @@ namespace SalamiTV.Controllers
                 return HttpNotFound();
             }
             ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            //ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
             return View(userTablau);
         }
 
@@ -142,7 +142,7 @@ namespace SalamiTV.Controllers
                 return RedirectToAction("Index");
             }
             ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name", userTablau.TvChannelID);
-            ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
+            //ViewBag.AspNetUsersId = new SelectList(dbContext.UserInfoes, "ID", "UserName", userTablau.AspNetUsersId);
             return View(userTablau);
         }
 

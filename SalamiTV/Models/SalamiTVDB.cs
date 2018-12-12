@@ -17,7 +17,7 @@ namespace SalamiTV.Models
         public virtual DbSet<TvChannel> TvChannels { get; set; }
         public virtual DbSet<TvProgram> TvPrograms { get; set; }
         public virtual DbSet<TvProgramCategory> TvProgramCategories { get; set; }
-        public virtual DbSet<UserInfo> UserInfoes { get; set; }
+        //public virtual DbSet<UserInfo> UserInfoes { get; set; }
         //public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<UserTablau> UserTablaus { get; set; } // ska det ändras till bara userid och tvid? 
 
@@ -72,13 +72,13 @@ namespace SalamiTV.Models
                 .WillCascadeOnDelete(false);
 
 
-            modelBuilder.Entity<UserInfo>()
-                .Property(e => e.UserName)
-                .IsUnicode(false);
+            //modelBuilder.Entity<UserInfo>()
+            //    .Property(e => e.UserName)
+            //    .IsUnicode(false);
 
-            modelBuilder.Entity<UserInfo>()
-                .Property(e => e.Password)
-                .IsUnicode(false);
+            //modelBuilder.Entity<UserInfo>()
+            //    .Property(e => e.Password)
+            //    .IsUnicode(false);
 
             //modelBuilder.Entity<UserInfo>()
             //    .HasMany(e => e.UserRoles)
@@ -86,11 +86,11 @@ namespace SalamiTV.Models
             //    .HasForeignKey(e => e.AspNetUsersId)
             //    .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<UserInfo>()
-                .HasMany(e => e.UserTablaus)
-                .WithRequired(e => e.UserInfo)
-                .HasForeignKey(e => e.AspNetUsersId)
-                .WillCascadeOnDelete(false);
+            //modelBuilder.Entity<UserInfo>()
+            //    .HasMany(e => e.UserTablaus)
+            //    .WithRequired(e => e.UserInfo)
+            //    .HasForeignKey(e => e.AspNetUsersId)
+            //    .WillCascadeOnDelete(false);
         }
     }
 }

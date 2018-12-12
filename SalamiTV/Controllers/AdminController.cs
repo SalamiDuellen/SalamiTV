@@ -19,7 +19,7 @@ namespace SalamiTV.Controllers
         {
             var programs = dbContex.TvPrograms.Select(x => x).GroupBy(x => x.Title).Select(x => x.FirstOrDefault()).ToList();
 
-            return View("_partialIndex", programs);
+            return View(programs);
         }
     }
 }

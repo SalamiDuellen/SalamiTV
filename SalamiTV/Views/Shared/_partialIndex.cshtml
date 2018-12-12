@@ -6,13 +6,14 @@
         @foreach (var program in Model)
         {
 
-            if (program.EndTime > DateTime.Now && program.Broadcasting < DateTime.Now )
+            if (program.EndTime > DateTime.Now && program.Broadcasting < DateTime.Now || !Context.User.IsInRole("Admin"))
             {
                 <li class="list-group-item">
                     <span class="visibleitem">
                         Pågående!
                         <br />
                         @Html.DisplayFor(modelItem => program.Broadcasting.TimeOfDay).ToString().Remove(5)
+                        <br />
                         <br />
                         @Html.DisplayFor(modelItem => program.Title)
                         <br />
@@ -39,6 +40,7 @@
 
                     <span class="visibleitem">
                         @Html.DisplayFor(modelItem => program.Broadcasting.TimeOfDay).ToString().Remove(5)
+                        <br />
                         <br />
                         @Html.DisplayFor(modelItem => program.Title)
                         <br />

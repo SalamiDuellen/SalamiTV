@@ -24,7 +24,7 @@ textarea {
     max-width: 280px;
 }
 /* Hide the carousel text when the screen is less than 600 pixels wide */
-@media (max-width: 600px) {
+/*@media (max-width: 600px) {
     #myCarousel {
         display: none;
     }
@@ -32,28 +32,28 @@ textarea {
     ul.active {
         background: #BDD4DE;
     }
-}
+}*/
 
-#channelheader {
-    /*background-color: #eaf3f7;*/
+/*#channelheader {
+    /*background-color: #eaf3f7;
     text-align: center;
-}
+}*/
 
-#programlist {
+/*#programlist {
     /*background-color: #eaf3f7;*/
-    /*border: 0px solid #a8bac4;*/
-}
+    /*border: 0px solid #a8bac4;
+}*/
 #programcolumn {
     width:100%;
 }
-#channelcolumns {
-    /*background-color:red;*/
+/*#channelcolumns {
+    /*background-color:red;
 }
-/*#channelname {
+#channelname {
         font-size: 16px;
         border: 10px;
-        /*border-color: #a8bac4;*/
-/*}*/
+        /*border-color: #a8bac4;
+}*/
 
 
 /*li form {
@@ -69,6 +69,7 @@ textarea {
     background-color: #BDD4DE;
     border: 2px solid #BDD4DE;
     border-bottom-width: 1px;
+    text-align: center;
 }
 
 .btn btn-default {
@@ -190,13 +191,13 @@ footer {
     padding: 25px;
 }
 
-.carousel-inner img {
-    width: 100%; /* Set width to 100% */
+/*.carousel-inner img {
+    width: 100%; /* Set width to 100% 
     margin: auto;
     min-height: 200px;
     max-height: 300px;
     max-width: 400px;
-}
+}*/
 /* En rubrik för att fylla ut lite på sidan*/
 #headaboutus {
     text-align: center;
@@ -223,25 +224,25 @@ label.error {
     display: inline;
 }
 p #adminmenu {
-    float:right;
+    /*float:right;*/
 }
 table .edittable {
     text-align: right;
 }
 
-@media (min-width:1170px) {
+/*@media (min-width:1170px) {
     table .edittable {
         width: 180px;
     }
-}
+}*/
 
 
-td.edittable a {
+/*td.edittable a {
     display: block;
     width: 20px;
     height: 20px;
-    text-indent: 9999px;
-    background-image: url(/Images/iconfinder_write_126582.png);
-    float: left;
+    /*text-indent: 9999px;*/
+    /*background-image: url(/Images/iconfinder_write_126582.png);
+    /*float: left;
     margin-right: 5px;
-}
+}*/

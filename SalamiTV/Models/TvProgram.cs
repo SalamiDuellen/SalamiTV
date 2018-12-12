@@ -38,6 +38,10 @@ namespace SalamiTV.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TvProgramCategory> TvProgramCategories { get; set; }
 
+        public override string ToString()
+        {
+            return Broadcasting.ToString();
+        }
 
     }
 }
