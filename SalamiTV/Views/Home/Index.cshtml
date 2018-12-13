@@ -2,7 +2,7 @@
 
 <section class="container-fluid">
     <div class="row">
-@Html.Partial("_partialPageNavigation", Model.GetDates)
+        @Html.Partial("_partialPageNavigation", Model)
         @*Programmen som Nicklas refererar till Puffar får sina htmlstrings från partial*@
         @foreach (var program in Model.InFocusPrograms)
         {
@@ -12,6 +12,7 @@
             </div>
         }
     </div>
+    
 </section>
 <h3 channelheader>
     @Html.Action("PartialTvChannel", "Home", new { id = Model.AspNetUserID, page = Model.Page })

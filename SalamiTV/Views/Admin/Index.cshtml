@@ -14,76 +14,76 @@
 </p>
 <section class="container-fluid">
     <div class="row">
-        <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 ">
-            <table class="table">
-                <tr>
-                    <th>
-                        Kanal
-                        @*@Html.DisplayNameFor(model => model.TvChannel.Name)*@
-                    </th>
-                    <th>
-                        Titel
-                        @*@Html.DisplayNameFor(model => model.Title)*@
-                    </th>
-                    <th>
-                        Information
-                        @*@Html.DisplayNameFor(model => model.Details)*@
-                    </th>
-                    <th>
-                        Sändningstid / datum
-                        @*@Html.DisplayNameFor(model => model.Broadcasting)*@
-                    </th>
-                    <th>
-                        Sluttid
-                        @*@Html.DisplayNameFor(model => model.EndTime)*@
-                    </th>
-                    <th>
-                        Längd
-                        @*@Html.DisplayNameFor(model => model.Duration)*@
-                    </th>
-                    <th>
-                        Är puff? 
-                        @*@Html.DisplayNameFor(model => model.IsInFocus)*@
-                    </th>
-                    <th class="edittable"></th>
-                </tr>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+    <table class="table">
+        <tr>
+            <th>
+                Kanal
+                @*@Html.DisplayNameFor(model => model.TvChannel.Name)*@
+            </th>
+            <th>
+                Titel
+                @*@Html.DisplayNameFor(model => model.Title)*@
+            </th>
+            <th>
+                Information
+                @*@Html.DisplayNameFor(model => model.Details)*@
+            </th>
+            <th>
+                Sändningstid / datum
+                @*@Html.DisplayNameFor(model => model.Broadcasting)*@
+            </th>
+            <th>
+                Sluttid
+                @*@Html.DisplayNameFor(model => model.EndTime)*@
+            </th>
+            <th>
+                Längd
+                @*@Html.DisplayNameFor(model => model.Duration)*@
+            </th>
+            <th>
+                Är puff?
+                @*@Html.DisplayNameFor(model => model.IsInFocus)*@
+            </th>
+            <th></th>
+        </tr>
 
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.TvChannel.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Title)
-                        </td>
-                        <td>
-                            @Html.DisplayTextFor(modelItem => item.Details)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Broadcasting)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.EndTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Duration)
-                        </td>
-                        <td>
-                            @*@Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)*@
-                            @Html.DisplayFor(modelItem => item.IsInFocus)
+        @foreach (var item in Model)
+        {
+            <tr class="edittable">
+                <td>
+                    @Html.DisplayFor(modelItem => item.TvChannel.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayTextFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Broadcasting)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndTime)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @*@Html.CheckBoxFor(modelItem => item.IsInFocus.HasValue)*@
+                    @Html.DisplayFor(modelItem => item.IsInFocus)
 
-                        </td>
-                        <td class="edittable">
-                            @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null) 
-                            @Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null) 
-                            @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null) 
-                        </td>
-                    </tr>
-                }
+                </td>
+                <td class="edittable">
+                    <a>@Html.ActionLink("Edit", "Edit", "TvProgram", new { id = item.ID }, null)</a>
+                    <a>@Html.ActionLink("Details", "Details", "TvProgram", new { id = item.ID }, null)</a>
+                    <a>@Html.ActionLink("Delete", "Delete", "TvProgram", new { id = item.ID }, null)</a>
+                </td>
+            </tr>
+        }
 
-            </table>
-        </div>
+    </table>
     </div>
+        </div>
 </section>
 <input type="submit" value="Spara" />

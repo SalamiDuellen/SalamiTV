@@ -9,9 +9,9 @@
 
 
     <!-- för autocompletefunktionen -->
-    <link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    @*<link href="https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>*@
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
@@ -30,7 +30,6 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <script src="~/Scripts/Resources.js"></script>
 
     <link rel="stylesheet" href="~/content/Site.css" />
     @*@Styles.Render("~/Content/css")*@
@@ -54,7 +53,11 @@
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Visa alla kanaler", "Index", "Home", new { showAll = true }, null)</li>
-                    <li>@Html.ActionLink("Visa mina kanaler", "Index", "Home", new { showAll = false }, null)</li>
+                    @if (Context.User.Identity.IsAuthenticated)
+                    {
+                        <li>@Html.ActionLink("Visa mina kanaler", "Index", "Home", new { showAll = false }, null)</li>
+                    }
+
                     <li>@Html.ActionLink("Om oss", "About", "Home")</li>
                     @*<li><a href="/Home/Contact">Kontakta oss</a></li>*@
                 </ul>
@@ -81,20 +84,16 @@
                         </li>
                     }
                     @*lägga till isinrole för admin och länka till adminsida*@
-                    else if (Context.User.Identity.IsAuthenticated && Context.User.IsInRole("Admin"))
+                    else if (Context.User.Identity.IsAuthenticated)
                     {
                         //Lägga id för den inloggade och skicka in den till index så att man kan söka på antingen id eller alla
-                        <li>  @Html.ActionLink("Logga ut", "LogOff", "Account")</li>
-                        <li>  @Html.ActionLink("Adminsida", "Index", "Admin")</li>
-                        <li><a href="~/UserTablau/Index"><span class="glyphicon glyphicon-home"></span></a></li>
-
-                        @*<li><a href="~/Account/LogOff"><span class="glyphicon glyphicon-home"></span></a></li>*@
-                    }
-                    else
-                    {
+                        if (Context.User.IsInRole("Admin"))
+                        {
+                            <li>  @Html.ActionLink("Adminsida", "Index", "Admin")</li>
+                            /**/
+                        }
                         <li>  @Html.ActionLink("Logga ut", "LogOff", "Account")</li>
                         <li><a href="~/UserTablau/Index"><span class="glyphicon glyphicon-home"></span></a></li>
-
                     }
                 </ul>
             </div>

@@ -8,8 +8,18 @@
     @ViewBag.UserName @HttpContext.Current.User.Identity.Name
 
 </h3>
-@Html.Partial("_partialPageNavigation", Model.GetDates)
+@Html.Partial("_partialPageNavigation", Model)
+<section>
+    <ul>
+        <li>
+            @Html.ActionLink("Lägg till en favoritkanal", "AddChannelToTablau", "UserTablau")
+            <br />
+            @Html.ActionLink("Ta bort en favoritkanal", "RemoveChannelFromTablau", "UserTablau")
+        </li>
+    </ul>
+</section>
 
-@Html.Action("PartialTvChannel", "Home", new { page = Model.Page })
+@Html.Action("PartialTvChannel", "Home", new { id = Model.AspNetUserID, page = Model.Page })
+
 
 @*@Html.Partial("_partialTvChannel", Model.TvChannels)*@

@@ -19,6 +19,7 @@ namespace SalamiTV.Controllers
 
         public ActionResult Index(bool showAll = false, int page = 0)
         {
+            //TODO ändra så att om id inte finns så kraschar det inte även
             //var channels = dbContext.TvChannels.ToList();
             if (showAll == false)
             {
@@ -48,14 +49,13 @@ namespace SalamiTV.Controllers
         [ChildActionOnly]
         public ActionResult PartialTvChannel(string id, int page = 0)
         {
-            //TODO: usertablaulistan visas i fel order
 
             //var userID = HttpContext.User.Identity.GetUserId();
             if (id == null)
             {
                 var model = new TemporaryViewModel
                 {
-                    TvChannels = dbContext.TvChannels.OrderByDescending(x => x.ID).ToList(),
+                    TvChannels = dbContext.TvChannels.ToList(),
                     Page = page
                 };
                 return PartialView(model);
@@ -110,10 +110,3 @@ namespace SalamiTV.Controllers
 
     }
 }
-
-
-//public class TemporaryViewModel
-//{
-//    public int Page { get; set; } = 0;
-//    public IEnumerable<TvChannel> TvChannels { get; set; }
-//}

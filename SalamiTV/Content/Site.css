@@ -3,7 +3,6 @@
     padding-bottom: 2px;
 }
 
-
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -23,44 +22,9 @@ select,
 textarea {
     max-width: 280px;
 }
-/* Hide the carousel text when the screen is less than 600 pixels wide */
-/*@media (max-width: 600px) {
-    #myCarousel {
-        display: none;
-    }
-
-    ul.active {
-        background: #BDD4DE;
-    }
-}*/
-
-/*#channelheader {
-    /*background-color: #eaf3f7;
-    text-align: center;
-}*/
-
-/*#programlist {
-    /*background-color: #eaf3f7;*/
-    /*border: 0px solid #a8bac4;
-}*/
 #programcolumn {
-    width:100%;
+    width: 100%;
 }
-/*#channelcolumns {
-    /*background-color:red;
-}
-#channelname {
-        font-size: 16px;
-        border: 10px;
-        /*border-color: #a8bac4;
-}*/
-
-
-/*li form {
-    padding-top: 15px;
-    padding-bottom: 15px;
-}*/
-
 #headerprogramlogo img {
     width: 15%;
 }
@@ -190,14 +154,6 @@ footer {
     background-color: #f2f2f2;
     padding: 25px;
 }
-
-/*.carousel-inner img {
-    width: 100%; /* Set width to 100% 
-    margin: auto;
-    min-height: 200px;
-    max-height: 300px;
-    max-width: 400px;
-}*/
 /* En rubrik för att fylla ut lite på sidan*/
 #headaboutus {
     text-align: center;
@@ -223,26 +179,33 @@ p {
 label.error {
     display: inline;
 }
+
 p #adminmenu {
-    /*float:right;*/
+    float:right;
 }
+#addedtablau {
+    float:left;
+    /*overflow:hidden;*/
+    margin-right:50px;
+}
+
 table .edittable {
     text-align: right;
 }
 
-/*@media (min-width:1170px) {
+@media (min-width:1170px) {
     table .edittable {
         width: 180px;
     }
-}*/
+}
 
 
-/*td.edittable a {
+td.edittable a {
     display: block;
     width: 20px;
     height: 20px;
     /*text-indent: 9999px;*/
-    /*background-image: url(/Images/iconfinder_write_126582.png);
-    /*float: left;
+    /*background-image: url(/Images/iconfinder_write_126582.png);*/
+    float: left;
     margin-right: 5px;
-}*/
+}

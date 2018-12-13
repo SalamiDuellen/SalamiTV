@@ -6,7 +6,7 @@
         @foreach (var program in Model)
         {
 
-            if (program.EndTime > DateTime.Now && program.Broadcasting < DateTime.Now || !Context.User.IsInRole("Admin"))
+            if (program.EndTime > DateTime.Now && program.Broadcasting < DateTime.Now )
             {
                 <li class="list-group-item">
                     <span class="visibleitem">
@@ -59,14 +59,14 @@
                     </span>
                     @Html.ActionLink("Gå till...", "Index", "TvChannel", new { id = program.TvChannelID }, null) <br />
 
-                    @if (Context.User.IsInRole("Admin"))
+                    @*@if (Context.User.IsInRole("Admin"))
                     {
                         <p id="adminmenu">
                             @Html.ActionLink("Edit", "Edit", "TvProgram", new { id = program.ID }, null) |
                             @Html.ActionLink("Details", "Details", "TvProgram", new { id = program.ID }, null) |
                             @Html.ActionLink("Delete", "Delete", "TvProgram", new { id = program.ID }, null) 
                         </p>
-                    }
+                    }*@
 
                 </li>
             }

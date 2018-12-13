@@ -8,6 +8,7 @@ namespace SalamiTV.ViewModels
 {
     public class SearchProgramVM
     {
+        bool _showAll;
         public List<TvChannel> TvChannels { get; set; }
         public List<TvProgram> InFocusPrograms { get; set; }
 
@@ -15,43 +16,20 @@ namespace SalamiTV.ViewModels
         public int Page { get; set; }
         public string AspNetUserID { get; set; }
         public GetDates GetDates { get; set; }
+        public bool ShowAll
+        { get=>_showAll;
+            set
+            {
+                _showAll = value;
+            }
+        }
 
-
-
-        //public List<TvChannel> RenderToUserTablau(List<TvChannel> tvChannels, List<UserTablau> userTablaus)
-        //{
-        //    List<TvChannel> channels = new List<TvChannel>();
-        //    foreach (var channel in tvChannels)
-        //    {
-        //        foreach (var tablau in userTablaus)
-        //        {
-        //            if (channel.ID == tablau.TvChannelID)
-        //            {
-        //                channels.Add(channel);
-        //                break;
-        //            }
-        //        }
-        //    }
-        //    return channels;
-
-        //}
 
         public SearchProgramVM()
         {
-            //ReturnDateStrings();
             GetDates = new GetDates();
             TvChannels = new List<TvChannel>();
         }
 
-        //void ReturnDateStrings()
-        //{
-        //    Dates = new List<string>();
-        //    for (int i = 0; i < 7; i++)
-        //    {
-        //        var dates = DateTime.Today.Date.AddDays(i).ToShortDateString();
-        //        Dates.Add(dates);
-
-        //    }
-        //}
     }
 }

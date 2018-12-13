@@ -38,6 +38,7 @@ namespace SalamiTV.Controllers
         }
 
         // GET: TvProgram/Create
+        [Authorize(Roles ="Admin")]
         public ActionResult Create()
         {
             ViewBag.TvChannelID = new SelectList(dbContext.TvChannels, "ID", "Name");
