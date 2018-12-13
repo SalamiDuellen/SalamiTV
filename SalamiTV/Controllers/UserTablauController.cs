@@ -17,6 +17,7 @@ namespace SalamiTV.Controllers
     {
         private SalamiTVDB dbContext = new SalamiTVDB();
 
+        [Authorize]
         public ActionResult Index(int page = 0)
         {
             //var userID = HttpContext.User.Identity.GetUserId();
@@ -69,37 +70,6 @@ namespace SalamiTV.Controllers
 
             return View(await userTablaus.ToListAsync());
         }
-
-        //        [HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<ActionResult> AddChannelToTablau(TvChannel tvChannel)
-        //{
-        //    /*
-        //     * Fullösningar is da new black!
-        //     * Tar ut en tvChannel från vyn och konverterar den till userTablau som kan skickas till databasen. 
-        //     * Model.IsValid funkar inte eftersom det är en tvkanal som kommer från vyn men en usertablau som ska in till databasen
-        //     */
-        //    var userID = HttpContext.User.Identity.GetUserId();
-        //    UserTablau userTablau = new UserTablau()
-        //    {
-        //        TvChannelID = tvChannel.ID,
-        //        AspNetUsersId = HttpContext.User.Identity.GetUserId()
-        //    };
-
-        //    if (userTablau.AspNetUsersId != null && userTablau.TvChannelID != null)
-        //    {
-        //        dbContext.UserTablaus.Add(userTablau);
-        //        await dbContext.SaveChangesAsync();
-        //        return RedirectToAction("Index");
-        //    }
-
-        //    var userTablaus = dbContext.UserTablaus.Where(x => x.AspNetUsersId == userID).Include(u => u.TvChannel);
-
-
-        //    return View(await userTablaus.ToListAsync());
-        //}
-
-
         public ActionResult RemoveChannelFromTablau()
         {
             var userId = User.Identity.GetUserId();

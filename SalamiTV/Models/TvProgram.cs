@@ -15,6 +15,7 @@ namespace SalamiTV.Models
             TvProgramCategories = new HashSet<TvProgramCategory>();
         }
 
+        DateTime _dateTime;
         public int ID { get; set; }
 
         [Required]
@@ -27,7 +28,14 @@ namespace SalamiTV.Models
 
         public DateTime Broadcasting { get; set; }
 
-        public DateTime EndTime { get; set; }
+        public DateTime EndTime
+        {
+            get => _dateTime;
+            set
+            {
+                _dateTime = Broadcasting.AddMinutes(Duration);
+            }
+        }
 
         public int Duration { get; set; }
 

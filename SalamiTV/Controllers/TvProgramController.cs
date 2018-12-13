@@ -51,7 +51,7 @@ namespace SalamiTV.Controllers
         [Authorize(Roles = "Admin")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Details,Broadcasting,Duration,TvChannelID")] TvProgram tvProgram)
+        public async Task<ActionResult> Create([Bind(Include = "ID,Title,Details,Broadcasting,EndTime,TvChannelID ,Duration, IsInFocus")] TvProgram tvProgram)
         {
             if (ModelState.IsValid)
             {
