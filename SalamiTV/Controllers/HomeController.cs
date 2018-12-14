@@ -44,7 +44,6 @@ namespace SalamiTV.Controllers
             }
         }
 
-
         //GET TvChannels
         [ChildActionOnly]
         public ActionResult PartialTvChannel(string id, int page = 0)
@@ -74,6 +73,7 @@ namespace SalamiTV.Controllers
         }
 
         //GET TvPrograms
+        [ChildActionOnly]
         public ActionResult Partial2(int id, int page = 0)
         {
             var from = DateTime.Now;

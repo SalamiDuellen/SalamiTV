@@ -210,6 +210,11 @@
     </Compile>
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\GetDates.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -271,6 +276,10 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="App_Data\hd.tlcsverige.se_2018-12-04.js.gz.json" />
     <Content Include="App_Data\hd.tlcsverige.se_2018-12-10.js.gz.json" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -291,7 +300,6 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="Views\UserTablau\Delete.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -334,9 +342,7 @@
     <Content Include="Views\TvChannel\Edit.cshtml" />
     <Content Include="Views\TvChannel\Index.cshtml" />
     <Content Include="Views\Home\PartialTvChannel.cshtml" />
-    <Content Include="Views\UserTablau\Create.cshtml" />
     <Content Include="Views\UserTablau\Details.cshtml" />
-    <Content Include="Views\UserTablau\Edit.cshtml" />
     <Content Include="Views\UserTablau\Index.cshtml" />
     <Content Include="Views\UserTablau\AddChannelToTablau.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />

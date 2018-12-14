@@ -43,29 +43,30 @@ namespace SalamiTV.Controllers
             return View(tvChannel);
         }
 
+        #region 
+        /*Trasigt*/
         // GET: TvChannel/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
+        //// POST: TvChannel/Create
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public async Task<ActionResult> Create([Bind(Include = "ID,Name")] TvChannel tvChannel)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        dbContext.TvChannels.Add(tvChannel);
+        //        await dbContext.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
 
-        // POST: TvChannel/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "ID,Name")] TvChannel tvChannel)
-        {
-            if (ModelState.IsValid)
-            {
-                dbContext.TvChannels.Add(tvChannel);
-                await dbContext.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(tvChannel);
-        }
-
+        //    return View(tvChannel);
+        //}
+        #endregion
         // GET: TvChannel/Edit/5
         public async Task<ActionResult> Edit(int? id)
         {

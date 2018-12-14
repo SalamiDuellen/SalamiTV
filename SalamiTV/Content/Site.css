@@ -57,7 +57,6 @@ textarea {
     background-color: #eaf3f7;
     min-height: 50px;
 }
-/*Vet inte om denna behövs...*/
 .hiddenitem {
     display: none;
 }
@@ -198,7 +197,6 @@ table .edittable {
         width: 180px;
     }
 }
-
 
 td.edittable a {
     display: block;
